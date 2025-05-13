@@ -2,7 +2,7 @@
 
 # Yogurt Process
 
-![Yogurt produce example](./image/yogurt_process.png)
+![Yogurt produce example](./image/rdf-ddl3)
 
 
 # Jena State Reasoner
