@@ -37,7 +37,7 @@ Please Check `src/main/resources/Sparql_Query_Yogurt.pdf` Folder, all the SPARQL
 
 ### Dependencies
 
-- **KeyMaeraX:** Download from [KeyMaeraX](https://keymaerax.org/) (Version 5.0.1, provided as a .jar file)
+- **KeyMaeraX:** Download from [KeyMaera X](https://keymaerax.org/) (Version 5.0.1, provided as a .jar file)
 - **Wolfram Engine:** Download from [Wolfram Engine](https://www.wolfram.com/engine/) (Version 13.1 was used; the Community Edition is free)
 
 Follow the [KeyMaeraX setup instructions](https://keymaerax.org/documentation.html#setup) to integrate the Wolfram Engine with KeyMaeraX.
