@@ -61,7 +61,7 @@ public class Validation {
      */
     private static Model createDataModel() {
         Model data = ModelFactory.createDefaultModel();
-        String pre = "http://aifb.kit.edu#";
+        String pre = "https://anonymous.example.org#";
 
         // Heater: On, x=45
         Resource heater = data.createResource(pre + "Heater");
