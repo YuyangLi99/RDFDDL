@@ -39,7 +39,7 @@ public class ModeChange2 extends BaseBuiltin {
         System.out.println("Processing transition: " + s1Uri + " -> " + s2Uri);
 
         // Only when it starts at s322, we go to the next steps
-        if (!"http://aifb.kit.edu#s322".equals(s1Uri)) {
+        if (!"https://anonymous.example.org#s322".equals(s1Uri)) {
             System.out.println("Source state is not s322, skipping");
             return false;
         }
@@ -156,7 +156,7 @@ public class ModeChange2 extends BaseBuiltin {
         String queryStr =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "SELECT ?minVal ?maxVal WHERE {\n" +
                         "  <" + stateUri + "> pre:hasShape ?shape .\n" +
                         "  ?shape sh:property ?prop .\n" +
@@ -200,7 +200,7 @@ public class ModeChange2 extends BaseBuiltin {
         String queryStr =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "ASK {\n" +
                         "  <" + stateUri + "> pre:hasShape ?shape .\n" +
                         "  ?shape sh:property ?prop .\n" +
@@ -234,7 +234,7 @@ public class ModeChange2 extends BaseBuiltin {
         String queryStr =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
                         "SELECT ?State ?StateShape ?StateNodeShape ?Mode ?pasteurOnMode ?derivative ?domainConstraint ?startCond ?endCond\n" +
                         "WHERE{\n" +
