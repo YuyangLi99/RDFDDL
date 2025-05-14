@@ -62,7 +62,7 @@ public class IsNextBuiltinTest {
         model.setNsPrefix("ex", example);
         Property nextpredicate = model.createProperty(example, "next");
 
-        String pre = "http://aifb.kit.edu#";
+        String pre = "https://anonymous.example.org#";
         model.setNsPrefix("ex", pre);
         String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
         String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
@@ -1407,32 +1407,32 @@ public class IsNextBuiltinTest {
 
           // [rule1: (?a ex:next ?b) <- isNext(?a, ?b), ?a a ex:state, ?b a ex:state ]
         String rules1 = "[rule1: (?a " + nextpredicate + " ?b) <- "
-                + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) "
-                + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) "
+                + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
+                + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
                 + " isNext(?a, ?b)" +
                 "]";
 
         String rules2 =   "[rule2: (?a " + ModeChange +  " ?b) <- "
-            + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) "
-            + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) "
+            + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
+            + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
             + "mode_change(?a, ?b)"
             + "]";
 
         String rules3 = "[rule3: (?a " + ModeChange2 +  " ?b) <- " +
-                "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) " +
-                "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) " +
+                "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
+                "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
                 "mode_change2(?a, ?b)" +
                 "]";
 
         String rules4 = "[rule4: (?a " + ModeChange3 +  " ?b) <- " +
-                "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) " +
-                "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) " +
+                "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
+                "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
                 "mode_change3(?a, ?b)" +
                 "]";
 
         String rules5 = "[rule5: (?a " + ModeChange4 +  " ?b) <- " +
-                "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) " +
-                "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://aifb.kit.edu#State>) " +
+                "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
+                "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
                 "mode_change4(?a, ?b)" +
                 "]";
 
