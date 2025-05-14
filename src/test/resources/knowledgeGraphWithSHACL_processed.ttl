@@ -1,6 +1,6 @@
 PREFIX ex:   <http://schema.org/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX pre:  <http://aifb.kit.edu#>
+PREFIX pre:  <https://anonymous.example.org#>
 PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX sh:   <http://www.w3.org/ns/shacl#>
