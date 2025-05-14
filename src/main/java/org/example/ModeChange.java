@@ -138,7 +138,7 @@ public class ModeChange extends BaseBuiltin {
         String sparql =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n"+
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
-                        "PREFIX pre: <http://aifb.kit.edu#>\n"+
+                        "PREFIX pre: <https://anonymous.example.org#>\n"+
                         "\n"+
                         "SELECT ?variable ?MAX ?MIN\n"+
                         "WHERE {\n"+
@@ -185,7 +185,7 @@ public class ModeChange extends BaseBuiltin {
         String sparql =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n"+
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
-                        "PREFIX pre: <http://aifb.kit.edu#>\n"+
+                        "PREFIX pre: <https://anonymous.example.org#>\n"+
                         "\n"+
                         "SELECT ?deviceMode ?startingCondition ?endingCondition ?record\n"+
                         "WHERE {\n"+
