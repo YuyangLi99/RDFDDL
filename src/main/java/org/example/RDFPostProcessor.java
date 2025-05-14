@@ -15,7 +15,7 @@ import java.util.*;
  * This program reads an RDF file, processes state transition relationships, and writes the results to an output file.
  */
 public class RDFPostProcessor {
-    private static final String PRE = "http://aifb.kit.edu#";
+    private static final String PRE = "https://anonymous.example.org#";
     private static final String EX_STATES = "http://example.org/states#";
 
     // Define original relationship predicates
