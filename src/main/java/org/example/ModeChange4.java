@@ -136,7 +136,7 @@ public class ModeChange4 extends BaseBuiltin {
         String queryString =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
                         "SELECT ?variable ?minVal ?maxVal WHERE {\n" +
                         "  BIND(<" + stateUri + "> AS ?s)\n" +
@@ -204,7 +204,7 @@ public class ModeChange4 extends BaseBuiltin {
         String queryString =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "ASK {\n" +
                         "  BIND(<" + stateUri + "> AS ?state)\n" +
                         "  ?state pre:hasShape ?stateShape .\n" +
@@ -231,7 +231,7 @@ public class ModeChange4 extends BaseBuiltin {
         String queryString =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "ASK {\n" +
                         "  BIND(<" + stateUri + "> AS ?state)\n" +
                         "  ?state pre:hasShape ?stateShape .\n" +
@@ -292,7 +292,7 @@ public class ModeChange4 extends BaseBuiltin {
     private String createConstraintQuery(String stateUri) {
         return "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                "PREFIX pre: <https://anonymous.example.org#>\n" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
                 "SELECT ?variable ?minVal ?maxVal WHERE {\n" +
                 "  BIND(<" + stateUri + "> AS ?s)\n" +
