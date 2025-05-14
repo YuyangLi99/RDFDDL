@@ -177,7 +177,7 @@ public class ModeChange4 extends BaseBuiltin {
     private String getHomogenizerOnModeStartCondition() {
         String queryString =
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "SELECT ?startCond WHERE {\n" +
                         "  pre:HomogenizerOnMode pre:hasODE ?odeBlank .\n" +
                         "  ?odeBlank rdf:type pre:ODE ;\n" +
