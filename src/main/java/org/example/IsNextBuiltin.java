@@ -104,7 +104,7 @@ public class IsNextBuiltin extends BaseBuiltin {
         String sparql =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "\n" +
                         "SELECT ?state ?Device ?StateShape ?deviceMode ?Derivative ?EvolutionDomainConstraint ?deviceModeRecord\n" +
                         "WHERE {\n" +
@@ -160,7 +160,7 @@ public class IsNextBuiltin extends BaseBuiltin {
         String sparql =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "\n" +
                         "SELECT ?State ?StateShape ?StateDeviceShape ?variable ?MAX ?MIN\n" +
                         "WHERE {\n" +
