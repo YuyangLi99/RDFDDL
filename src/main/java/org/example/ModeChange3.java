@@ -156,7 +156,7 @@ public class ModeChange3 extends BaseBuiltin {
         String queryStr =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "SELECT ?variable ?minVal ?maxVal WHERE {\n" +
                         "  BIND(<" + stateUri + "> AS ?s1)\n" +
                         "  ?s1 pre:hasShape ?s1Shape .\n" +
@@ -209,7 +209,7 @@ public class ModeChange3 extends BaseBuiltin {
     private boolean checkStateHasPasteurOffMode(String stateUri) {
         String queryStr =
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "ASK {\n" +
                         "  <" + stateUri + "> pre:hasPasteurizer pre:Pasteurizer .\n" +
@@ -245,7 +245,7 @@ public class ModeChange3 extends BaseBuiltin {
         String queryStr =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX pre: <http://aifb.kit.edu#>\n" +
+                        "PREFIX pre: <https://anonymous.example.org#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
                         "SELECT ?State ?StateShape ?StateNodeShape ?Mode ?CoolerMode ?derivative ?domainConstraint ?startCond ?endCond\n" +
                         "WHERE{\n" +
