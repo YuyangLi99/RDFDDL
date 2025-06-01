@@ -1,0 +1,747 @@
+PREFIX ex:   <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX pre:  <https://anonymous.example.org#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sh:   <http://www.w3.org/ns/shacl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+pre:s622Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s622CoolerShape;
+                          sh:path      pre:hasCooler
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s622CoolerShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "45"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "40"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s622  rdf:type     pre:State;
+        pre:hasCooler  pre:Cooler;
+        pre:hasShape   pre:s622Shape .
+
+pre:s612Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s612CoolerShape;
+                          sh:path      pre:hasCooler
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s612CoolerShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "45"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "40"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s612  rdf:type     pre:State;
+        pre:hasCooler  pre:Cooler;
+        pre:hasShape   pre:s612Shape;
+        <http://example.org/states#ModeChange>
+                pre:s622 .
+
+pre:s522Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s522PasteurizerShape;
+                          sh:path      pre:hasPasteurizer
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s522PasteurizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "95"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "90"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s522  rdf:type          pre:State;
+        pre:hasPasteurizer  pre:Pasteurizer;
+        pre:hasShape        pre:s522Shape;
+        <http://example.org/states#ModeChange3>
+                pre:s612;
+        <http://example.org/states#next>
+                pre:s422 .
+
+pre:s512Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s512PasteurizerShape;
+                          sh:path      pre:hasPasteurizer
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s512PasteurizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "95"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "90"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s512  rdf:type          pre:State;
+        pre:hasPasteurizer  pre:Pasteurizer;
+        pre:hasShape        pre:s512Shape;
+        <http://example.org/states#ModeChange>
+                pre:s522 .
+
+pre:s422Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s422PasteurizerShape;
+                          sh:path      pre:hasPasteurizer
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s422PasteurizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "90"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "65"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s422  rdf:type          pre:State;
+        pre:hasPasteurizer  pre:Pasteurizer;
+        pre:hasShape        pre:s422Shape .
+
+pre:s412Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s412PasteurizerShape;
+                          sh:path      pre:hasPasteurizer
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s412PasteurizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "90"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "65"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s412  rdf:type          pre:State;
+        pre:hasPasteurizer  pre:Pasteurizer;
+        pre:hasShape        pre:s412Shape;
+        <http://example.org/states#next>
+                pre:s512 .
+
+pre:s312Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s312HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s312HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s312HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "20"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "10"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s312HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "65"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "55"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s312  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s312Shape;
+        <http://example.org/states#ModeChange>
+                pre:s322;
+        <http://example.org/states#next>
+                pre:s212 .
+
+pre:s311Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s311HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s311HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s311HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "20"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "10"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s311HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "65"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "55"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s311  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s311Shape;
+        <http://example.org/states#ModeChange>
+                pre:s322 .
+
+pre:s322Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s322HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s322HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s322HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "20"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "10"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s322HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "65"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "55"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s322  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s322Shape;
+        <http://example.org/states#ModeChange2>
+                pre:s512 , pre:s412;
+        <http://example.org/states#next>
+                pre:s222 , pre:s122 .
+
+pre:s222Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s222HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s222HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s222HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s222HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "55"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s222  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s222Shape;
+        <http://example.org/states#next>
+                pre:s122 .
+
+pre:s212Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s212HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s212HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s212HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s212HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "55"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s212  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s212Shape;
+        <http://example.org/states#ModeChange>
+                pre:s222;
+        <http://example.org/states#ModeChange4>
+                pre:s211 .
+
+pre:s211Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s211HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s211HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s211HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s211HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "55"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s211  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s211Shape;
+        <http://example.org/states#ModeChange>
+                pre:s222;
+        <http://example.org/states#next>
+                pre:s311 .
+
+pre:s122Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s122HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s122HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s122HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:int;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s122HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "55"^^xsd:int;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s122  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s122Shape .
+
+pre:s112Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s112HomogenizerShape;
+                          sh:path      pre:hasHomogenizer
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s112HeaterShape;
+                          sh:path      pre:hasHeater
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s112HomogenizerShape
+        rdf:type     sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "10"^^xsd:int;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:P
+                     ];
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s112HeaterShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "55"^^xsd:int;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:x
+                     ];
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ] .
+
+pre:s112  rdf:type          pre:State;
+        pre:hasHeater       pre:Heater;
+        pre:hasHomogenizer  pre:Homogenizer;
+        pre:hasShape        pre:s112Shape;
+        <http://example.org/states#next>
+                pre:s212 .
+
+pre:Operator  rdf:type         ex:Person;
+        pre:name               "John Doe";
+        pre:operatesEquipment  pre:Homogenizer , pre:Heater .
+
+pre:PackagedYogurt  rdf:type  ex:Product;
+        pre:name  "Packaged Yogurt" .
+
+pre:PackagingStep  rdf:type  ex:ProcessStep;
+        pre:inputMaterial   pre:ApprovedYogurt;
+        pre:name            "Packaging Yogurt";
+        pre:outputMaterial  pre:PackagedYogurt .
+
+pre:ApprovedYogurt  rdf:type  ex:Product;
+        pre:name  "Approved Yogurt" .
+
+pre:QualityControl  rdf:type  ex:Process;
+        pre:inputMaterial   pre:Yogurt;
+        pre:name            "Quality Control Step";
+        pre:nextStep        pre:PackagingStep;
+        pre:outputMaterial  pre:ApprovedYogurt .
+
+pre:Yogurt  rdf:type  ex:Product;
+        pre:name  "Yogurt" .
+
+pre:HomogenizedMilk  rdf:type  ex:Product;
+        pre:name  "Homogenized Milk" .
+
+pre:HeatedMilk  rdf:type  ex:Product;
+        pre:name  "Heated Milk" .
+
+pre:StandardMilk  rdf:type  ex:Product;
+        pre:name  "Standard Milk" .
+
+pre:HomogenizationStep
+        rdf:type            ex:ProcessStep;
+        pre:inputMaterial   pre:HeatedMilk;
+        pre:name            "Homogenizing Milk";
+        pre:nextStep        pre:QualityControl;
+        pre:outputMaterial  pre:HomogenizedMilk;
+        pre:usesEquipment   pre:Homogenizer .
+
+pre:HeatingStep  rdf:type   ex:ProcessStep;
+        pre:inputMaterial   pre:StandardMilk;
+        pre:name            "Heating Milk";
+        pre:nextStep        pre:HomogenizationStep;
+        pre:outputMaterial  pre:HeatedMilk;
+        pre:usesEquipment   pre:Heater .
+
+pre:YogurtProductionProcess
+        rdf:type            ex:Process;
+        pre:hasProcessStep  pre:PackagingStep , pre:QualityControl , pre:HomogenizationStep , pre:HeatingStep;
+        pre:name            "Yogurt Production Process" .
+
+pre:YogurtFactory  rdf:type  ex:Organization;
+        pre:hasEquipment     pre:Homogenizer , pre:Heater;
+        pre:name             "Yogurt Production Ltd.";
+        pre:operatesProcess  pre:YogurtProductionProcess;
+        ex:address           "123 Dairy Lane, Milk City, Country" .
+
+pre:Cooler  pre:name     "Industrial Cooler";
+        ex:capacity      "1500L";
+        ex:manufacturer  "Cooler Solutions Inc.";
+        ex:model         "IC-1500" .
+
+pre:CoolerOffMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Cooler;
+        pre:hasMode    pre:OffMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "9.68";
+                         pre:endingCondition            "false";
+                         pre:evolutionDomainConstraint  "x <= 45";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x <= 40"
+                       ] .
+
+pre:CoolerOnMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Cooler;
+        pre:hasMode    pre:OnMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "-9.68";
+                         pre:endingCondition            "x <= 40";
+                         pre:evolutionDomainConstraint  "x <= 90";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x >= 90"
+                       ] .
+
+pre:Pasteurizer  pre:name  "Industrial Pasteurizer";
+        ex:capacity      "3000L";
+        ex:manufacturer  "Pasteurizer Corp.";
+        ex:model         "IP-3000" .
+
+pre:PasteurizationOffMode
+        rdf:type       pre:ModeRecord;
+        pre:hasDevice  pre:Pasteurizer;
+        pre:hasMode    pre:OffMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "-9.68";
+                         pre:endingCondition            "false";
+                         pre:evolutionDomainConstraint  "x <= 95";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x >= 90"
+                       ] .
+
+pre:PasteurizationOnMode
+        rdf:type       pre:ModeRecord;
+        pre:hasDevice  pre:Pasteurizer;
+        pre:hasMode    pre:OnMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "9.68";
+                         pre:endingCondition            "x >= 90";
+                         pre:evolutionDomainConstraint  "x <= 95";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x <= 90"
+                       ] .
+
+pre:Homogenizer  rdf:type  pre:Device;
+        pre:name           "High-Pressure Homogenizer";
+        pre:pressureRange  "Up to 300 bar";
+        ex:capacity        "2000L";
+        ex:manufacturer    "Homogenizer Co.";
+        ex:model           "HPH-2000" .
+
+pre:HomogenizerOffMode
+        rdf:type       pre:ModeRecord;
+        pre:hasDevice  pre:Homogenizer;
+        pre:hasMode    pre:OffMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "-2";
+                         pre:endingCondition            "false";
+                         pre:evolutionDomainConstraint  "P<=20";
+                         pre:evolvingVariable           pre:P;
+                         pre:startingCondition          "P>=10"
+                       ] .
+
+pre:HomogenizerOnMode
+        rdf:type       pre:ModeRecord;
+        pre:hasDevice  pre:Homogenizer;
+        pre:hasMode    pre:OnMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "2";
+                         pre:endingCondition            "P>=10";
+                         pre:evolutionDomainConstraint  "P<=20";
+                         pre:evolvingVariable           pre:P;
+                         pre:startingCondition          "x>=55"
+                       ] .
+
+pre:Heater  pre:name          "Industrial Heater";
+        pre:temperatureRange  "Up to 100°C";
+        ex:capacity           "5000L";
+        ex:manufacturer       "Heater Manufacturer Inc.";
+        ex:model              "IH-5000" .
+
+pre:HeaterOffMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Heater;
+        pre:hasMode    pre:OffMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "-9.68";
+                         pre:endingCondition            "false";
+                         pre:evolutionDomainConstraint  "x<=65";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x>=55"
+                       ] .
+
+pre:HeaterOnMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Heater;
+        pre:hasMode    pre:OnMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "9.68";
+                         pre:endingCondition            "x>=55";
+                         pre:evolutionDomainConstraint  "x<=65";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x<=55"
+                       ] .
