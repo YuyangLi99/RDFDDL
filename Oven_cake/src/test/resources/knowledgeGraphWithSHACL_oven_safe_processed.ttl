@@ -1,0 +1,146 @@
+PREFIX pre: <http://anonymous.example.org#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sh:  <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+pre:s12OvenShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "180"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:x
+                     ] .
+
+pre:s21Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s21OvenShape;
+                          sh:path      pre:hasOven
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s11  rdf:type     pre:State;
+        pre:hasOven   pre:Oven;
+        pre:hasShape  pre:s11Shape;
+        <http://example.org/states#Oven_OffMode_to_OnMode>
+                pre:s12 .
+
+pre:s22OvenShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "200"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "180"^^xsd:long;
+                       sh:path          pre:x
+                     ] .
+
+<http://example.org/states#Oven_OffMode_to_OnMode>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Change Oven from OffMode to OnMode" .
+
+<http://example.org/states#Oven_OnMode_to_OffMode>
+        <http://www.w3.org/2000/01/rdf-schema#label>
+                "Change Oven from OnMode to OffMode" .
+
+pre:s21  rdf:type     pre:State;
+        pre:hasOven   pre:Oven;
+        pre:hasShape  pre:s21Shape;
+        <http://example.org/states#Oven_OnMode_to_OffMode>
+                pre:s22 .
+
+pre:s11Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s11OvenShape;
+                          sh:path      pre:hasOven
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s22Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s22OvenShape;
+                          sh:path      pre:hasOven
+                        ];
+        sh:targetClass  pre:State .
+
+pre:OvenOnMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Oven;
+        pre:hasMode    pre:OnMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "(2620 - 10*x) / 4000";
+                         pre:endingCondition            "x >= 180";
+                         pre:evolutionDomainConstraint  "x <= 200";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x <= 180"
+                       ] .
+
+pre:s21OvenShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "200"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minInclusive  "180"^^xsd:long;
+                       sh:path          pre:x
+                     ] .
+
+pre:OvenOffMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Oven;
+        pre:hasMode    pre:OffMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "(-10*x + 200) / 4000";
+                         pre:endingCondition            "x <= 180";
+                         pre:evolutionDomainConstraint  "x <= 200";
+                         pre:evolvingVariable           pre:x;
+                         pre:startingCondition          "x >= 180"
+                       ] .
+
+pre:s12Shape  rdf:type  sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s12OvenShape;
+                          sh:path      pre:hasOven
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s12  rdf:type     pre:State;
+        pre:hasOven   pre:Oven;
+        pre:hasShape  pre:s12Shape;
+        <http://example.org/states#next>
+                pre:s21 .
+
+pre:s11OvenShape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxInclusive  "180"^^xsd:long;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:path          pre:x
+                     ] .
+
+pre:s22  rdf:type     pre:State;
+        pre:hasOven   pre:Oven;
+        pre:hasShape  pre:s22Shape;
+        <http://example.org/states#next>
+                pre:s11 .
+
+pre:Oven  rdf:type                    <http://schema.org/Product>;
+        <http://schema.org/capacity>  "50L";
+        <http://schema.org/manufacturer>
+                "KitchenTech Ltd.";
+        <http://schema.org/model>     "KT-2025" .
