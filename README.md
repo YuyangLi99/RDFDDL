@@ -26,16 +26,15 @@ This repository contains two examples to demonstrate the RDFdL pipeline:
 #### Yogurt Example 
 
 * **Test Entry Point**: `yogurt_example/src/test/java/IsNextBuiltinTest.java`
+* **SHACL Validation**: `Yogurt_example/src/test/java/org/example/Validation.java` checks each state against SHACL shapes. Run separately with:  
+  ```bash
+  mvn test -pl Yogurt_example -Dtest=Validation
 * **To Run**: The test automatically executes all reasoning rules, generating two TTL output files: one with the original inferred relations and one that is post-processed with more descriptive relationship names.
 * **To Verify**: If you wish to verify a transition in KeYmaera X, you can use the `Prove_helper.java` class, which constructs and sends the dL proof requests.
 
 #### Oven Example 
 
 * **Test Entry Point**: `oven_example/src/test/java/IsNextBuiltinTest.java`
-* **SHACL Validation**:  
-  `Yogurt_example/src/test/java/org/example/Validation.java` checks each state against SHACL shapes. Run separately with:  
-  ```bash
-  mvn test -pl Yogurt_example -Dtest=Validation
 * **To Run**: Running this test generates the `knowledgeGraphWithSHACL_oven_safe_processed.ttl` file, which contains the final, inferred state-transition graph.
 * **To Verify**: To validate the oven's temperature control safety properties, the dL script generated via `Prove_helper.java` can be imported into KeYmaera X for analysis.
 
