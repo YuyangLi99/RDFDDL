@@ -7,9 +7,10 @@ This repository implements the **RDFdL Verification Pipeline**, connecting RDF/S
 The core of this project is the **"RDFdL Verification Pipeline"**, which operates as follows:
 
 1.  **Modeling with RDF/SHACL**: We model a Cyber-Physical System—its components, states, and physical constraints—using the Resource Description Framework (RDF). The Shapes Constraint Language (SHACL) is used to define the precise rules and conditions for each state.
-2.  **Reasoning with Jena**: The Apache Jena framework is used to reason over the RDF model. Custom reasoner `Builtin` functions are implemented to infer potential state transitions based on the system's logic.
-3.  **Proof with KeYmaera X**: For each inferred transition, the system generates a formal proof obligation expressed in Differential Dynamic Logic (dL). This proof is sent to the **KeYmaera X** theorem prover for validation.
-4.  **Verified State Graph**: A transition is only accepted and added to the final knowledge graph if KeYmaera X successfully proves its logical correctness. The final output is a fully verified state-transition graph of the hybrid system.
+2.  **SHACL Validation**: Before inferring any transitions, each RDF state is checked against its SHACL shape (`Validation.java`). This ensures no invalid state (one that violates the predefined constraints) enters the reasoning or proof stages.
+3.  **Reasoning with Jena**: The Apache Jena framework is used to reason over the RDF model. Custom reasoner `Builtin` functions are implemented to infer potential state transitions based on the system's logic.
+4.  **Proof with KeYmaera X**: For each inferred transition, the system generates a formal proof obligation expressed in Differential Dynamic Logic (dL). This proof is sent to the **KeYmaera X** theorem prover for validation.
+5.  **Verified State Graph**: A transition is only accepted and added to the final knowledge graph if KeYmaera X successfully proves its logical correctness. The final output is a fully verified state-transition graph of the hybrid system.
 
 This approach ensures that the system's behavior is not just modeled but is also mathematically guaranteed to be safe and correct.
 
@@ -47,6 +48,7 @@ From the root directory (`RDFDDL-main/`), run the following commands:
 
 ```bash
 # Build all modules
+ 
 mvn clean install
 
 # Run the Yogurt example test specifically
