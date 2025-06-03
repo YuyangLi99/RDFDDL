@@ -1,8 +1,8 @@
 # RDFdL: Integrating RDF with Differential Dynamic Logic
 
-This repository implements the **RDF🡕dL Verification Pipeline**, connecting RDF/SHACL modeling with differential dynamic logic (dL) proofs to model and validate Cyber-Physical Systems (CPS) in a mathematically guaranteed way.
+This repository implements the **RDFdL Verification Pipeline**, connecting RDF/SHACL modeling with differential dynamic logic (dL) proofs to model and validate Cyber-Physical Systems (CPS) in a mathematically guaranteed way.
 
-## 1. Project Introduction 📜
+## 1. Project Introduction 
 
 The core of this project is the **"RDFdL Verification Pipeline"**, which operates as follows:
 
