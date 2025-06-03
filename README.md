@@ -8,18 +8,18 @@ The core of this project is the **"RDFdL Verification Pipeline"**, which operate
 
 1.  **Modeling with RDF/SHACL**: We model a Cyber-Physical System—its components, states, and physical constraints—using the Resource Description Framework (RDF). The Shapes Constraint Language (SHACL) is used to define the precise rules and conditions for each state.
 2.  **SHACL Validation**: Before inferring any transitions, each RDF state is checked against its SHACL shape (`Validation.java`). This ensures no invalid state (one that violates the predefined constraints) enters the reasoning or proof stages.
-3.  **Reasoning with Jena**: The Apache Jena framework is used to reason over the RDF model. Custom reasoner `Builtin` functions are implemented to infer potential state transitions based on the system's logic.
+3.  **Reasoning with Jena**: The Apache Jena framework is used to reason the validated RDF graph and propose potential state transitions based on the system’s logic (e.g., continuous evolution or mode switches). These inferences are added as candidate triples (e.g., `ex:next`, `ex:ModeChange`).
 4.  **Proof with KeYmaera X**: For each inferred transition, the system generates a formal proof obligation expressed in Differential Dynamic Logic (dL). This proof is sent to the **KeYmaera X** theorem prover for validation.
 5.  **Verified State Graph**: A transition is only accepted and added to the final knowledge graph if KeYmaera X successfully proves its logical correctness. The final output is a fully verified state-transition graph of the hybrid system.
 
-This approach ensures that the system's behavior is not just modeled but is also mathematically guaranteed to be safe and correct.
+This approach ensures that the CPS model is both semantically rich (via RDF/SHACL) and formally safe (via KeYmaera X proofs).
 
 ## 2. Modules Overview 
 
-This repository contains two examples to demonstrate the RDF-DDL pipeline:
+This repository contains two examples to demonstrate the RDFdL pipeline:
 
-* **`Yogurt_example/`**: A complex, multi-stage manufacturing process for producing yogurt. This example involves multiple devices and showcases reasoning across device handoffs and multi-mode changes.
-* **`Oven_cake/`**: A more focused example of a single-device system—an industrial oven. It models the temperature control logic, inferring transitions between heating and cooling states based on differential equations.
+* **`Yogurt_example/`**: A multi-stage yogurt manufacturing process. Involves multiple devices (heater, homogenizer, pasteurizer, cooler) and showcases cross-device handoffs and multi-mode transitions.
+* **`Oven_cake/`**: A single-device example: an industrial oven controlling temperature. Models heating and cooling dynamics and infers transitions between four discrete states (two modes × two temperature regions).
 
 ## 3. Running Each Example 🚀
 
@@ -32,6 +32,10 @@ This repository contains two examples to demonstrate the RDF-DDL pipeline:
 #### Oven Example 
 
 * **Test Entry Point**: `oven_example/src/test/java/IsNextBuiltinTest.java`
+* **SHACL Validation**:  
+  `Yogurt_example/src/test/java/org/example/Validation.java` checks each state against SHACL shapes. Run separately with:  
+  ```bash
+  mvn test -pl Yogurt_example -Dtest=Validation
 * **To Run**: Running this test generates the `knowledgeGraphWithSHACL_oven_safe_processed.ttl` file, which contains the final, inferred state-transition graph.
 * **To Verify**: To validate the oven's temperature control safety properties, the dL script generated via `Prove_helper.java` can be imported into KeYmaera X for analysis.
 
