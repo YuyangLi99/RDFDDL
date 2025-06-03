@@ -4,7 +4,7 @@ This repository implements the **RDF🡕dL Verification Pipeline**, connecting R
 
 ## 1. Project Introduction 📜
 
-The core of this project is the **"RDF 🡕 dL Verification Pipeline"**, which operates as follows:
+The core of this project is the **"RDFdL Verification Pipeline"**, which operates as follows:
 
 1.  **Modeling with RDF/SHACL**: We model a Cyber-Physical System—its components, states, and physical constraints—using the Resource Description Framework (RDF). The Shapes Constraint Language (SHACL) is used to define the precise rules and conditions for each state.
 2.  **Reasoning with Jena**: The Apache Jena framework is used to reason over the RDF model. Custom reasoner `Builtin` functions are implemented to infer potential state transitions based on the system's logic.
@@ -13,7 +13,7 @@ The core of this project is the **"RDF 🡕 dL Verification Pipeline"**, which o
 
 This approach ensures that the system's behavior is not just modeled but is also mathematically guaranteed to be safe and correct.
 
-## 2. Modules Overview 📦
+## 2. Modules Overview 
 
 This repository contains two examples to demonstrate the RDF-DDL pipeline:
 
@@ -22,13 +22,13 @@ This repository contains two examples to demonstrate the RDF-DDL pipeline:
 
 ## 3. Running Each Example 🚀
 
-#### Yogurt Example 🍦
+#### Yogurt Example 
 
 * **Test Entry Point**: `yogurt_example/src/test/java/IsNextBuiltinTest.java`
 * **To Run**: The test automatically executes all reasoning rules, generating two TTL output files: one with the original inferred relations and one that is post-processed with more descriptive relationship names.
 * **To Verify**: If you wish to verify a transition in KeYmaera X, you can use the `Prove_helper.java` class, which constructs and sends the dL proof requests.
 
-#### Oven Example 🍰
+#### Oven Example 
 
 * **Test Entry Point**: `oven_example/src/test/java/IsNextBuiltinTest.java`
 * **To Run**: Running this test generates the `knowledgeGraphWithSHACL_oven_safe_processed.ttl` file, which contains the final, inferred state-transition graph.
