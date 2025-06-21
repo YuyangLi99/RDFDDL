@@ -6,160 +6,205 @@ import org.apache.jena.shacl.*;
 import org.apache.jena.shacl.validation.ReportEntry;
 import org.apache.jena.vocabulary.RDF;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.File;
 import java.util.*;
 
 public class Validation {
 
     public static void main(String[] args) {
+        System.out.println("Starting SHACL Validation...");
 
-        // 1) Load shapes model (the one containing s112, s122, s211, etc.)
+        // Load shapes model
         Model shapesModel = ModelFactory.createDefaultModel();
-        try (InputStream in = Validation.class.getResourceAsStream("/knowledgeGraphWithSHACL_original1.ttl")) {
-            if (in == null) {
-                throw new RuntimeException("Cannot find knowledgeGraphWithSHACL_original1.ttl in resources!");
+
+        String relativePath = "src/test/resources/knowledgeGraphWithSHACL_oven_safe.ttl";
+
+        try {
+            File file = new File(relativePath);
+            System.out.println("Looking for file at: " + file.getAbsolutePath());
+            System.out.println("File exists: " + file.exists());
+
+            if (!file.exists()) {
+                throw new RuntimeException("File not found at: " + relativePath);
             }
-            // Explicitly parse as Turtle
-            RDFDataMgr.read(shapesModel, in, "urn:base:", org.apache.jena.riot.Lang.TURTLE);
+
+            try (FileInputStream fis = new FileInputStream(file)) {
+                RDFDataMgr.read(shapesModel, fis, "urn:base:", org.apache.jena.riot.Lang.TURTLE);
+                System.out.println("Successfully loaded shapes model!");
+            }
+
         } catch (Exception e) {
+            System.err.println("Error loading shapes model: " + e.getMessage());
             e.printStackTrace();
             return;
         }
 
-        // 2) Create real-time data (Heater=On, x=45; Homogenizer=Off, p=9)
-        Model dataModel = createDataModel();
+        // Test multiple scenarios
+        System.out.println("\n====== Testing Multiple Oven Scenarios ======\n");
 
-        // 3) Execute SHACL validation
+        // Scenario 1: Oven=On, x=60 (should ONLY match s12Shape)
+        testScenario(shapesModel, "OnMode", 60, "Scenario 1: Oven=On, x=60");
+
+        // Scenario 2: Oven=Off, x=150 (should ONLY match s11Shape)
+        testScenario(shapesModel, "OffMode", 150, "Scenario 2: Oven=Off, x=150");
+
+        // Scenario 3: Oven=On, x=190 (should ONLY match s22Shape)
+        testScenario(shapesModel, "OnMode", 190, "Scenario 3: Oven=On, x=190");
+
+        // Scenario 4: Oven=Off, x=200 (should ONLY match s21Shape)
+        testScenario(shapesModel, "OffMode", 200, "Scenario 4: Oven=Off, x=200");
+
+        // Scenario 5: Invalid - Oven=On, x=250 (should match NO shapes)
+        testScenario(shapesModel, "OnMode", 250, "Scenario 5: Oven=On, x=250 (Invalid)");
+
+    }
+
+    private static void testScenario(Model shapesModel, String mode, int temperature, String scenarioName) {
+        System.out.println("\n--- " + scenarioName + " ---");
+
+        Model dataModel = createDataModel(mode, temperature);
+
+        // Execute SHACL validation
         ValidationReport report = ShaclValidator.get().validate(
                 shapesModel.getGraph(),
                 dataModel.getGraph(),
                 null
         );
 
-        // 4) Print basic result
-        System.out.println("\n====== SHACL Validation Result ======");
-        if (report.conforms()) {
-            System.out.println("Real-time data DOES conform to the shapes (no violations).");
-        } else {
-            System.out.println("Real-time data has violations:");
-            for (ReportEntry entry : report.getEntries()) {
-                System.out.println(" - Message    : " + entry.message());
-                System.out.println("   Focus Node : " + entry.focusNode());
-                System.out.println("   Source     : " + entry.source());
-                System.out.println();
-            }
-        }
+        // Determine which main shapes (not OvenShapes) are satisfied
+        Set<Resource> mainShapes = gatherMainShapes(shapesModel);
+        Set<Resource> violatedMainShapes = new HashSet<>();
 
-        // 5) Also list which NodeShapes are violated vs. matched
-        listViolatedAndMatchedShapes(shapesModel, report);
-    }
-
-    /**
-     * This data should match s112 if s112 is defined as:
-     *  - Heater=On, x <= 55
-     *  - Homogenizer=Off, p <= 10
-     */
-    private static Model createDataModel() {
-        Model data = ModelFactory.createDefaultModel();
-        String pre = "https://anonymous.example.org#";
-
-        // Heater: On, x=45
-        Resource heater = data.createResource(pre + "Heater");
-        heater.addProperty(RDF.type, data.createResource(pre + "Device"));
-        heater.addProperty(data.createProperty(pre, "mode"), data.createResource(pre + "OnMode"));
-        heater.addLiteral(data.createProperty(pre, "x"), 45);
-
-        // Homogenizer: Off, p=9
-        Resource homogenizer = data.createResource(pre + "Homogenizer");
-        homogenizer.addProperty(RDF.type, data.createResource(pre + "Device"));
-        homogenizer.addProperty(data.createProperty(pre, "mode"), data.createResource(pre + "OffMode"));
-        homogenizer.addLiteral(data.createProperty(pre, "P"), 9);
-
-        // realTimeState: references Heater, Homogenizer
-        // typed as ex:State so that shapes with sh:targetClass ex:State will pick it up
-        Resource realTimeState = data.createResource(pre + "realTimeState");
-        realTimeState.addProperty(RDF.type, data.createResource(pre + "State"));
-        realTimeState.addProperty(data.createProperty(pre, "hasHeater"), heater);
-        realTimeState.addProperty(data.createProperty(pre, "hasHomogenizer"), homogenizer);
-
-        return data;
-    }
-
-    /**
-     * Lists out which NodeShapes are violated vs. matched, just for debug convenience.
-     */
-    private static void listViolatedAndMatchedShapes(Model shapesModel, ValidationReport report) {
-        Set<Resource> allNodeShapes = gatherAllNodeShapes(shapesModel);
-
-        // Build map: propertyShape -> nodeShape
-        Map<Resource, Resource> propertyShapeToNodeShape = mapPropertyShapeToParent(shapesModel, allNodeShapes);
-
-        // Gather violated shapes
-        Set<Resource> violatedShapes = new HashSet<>();
+        // Check violations for main shapes only
         for (ReportEntry entry : report.getEntries()) {
             org.apache.jena.graph.Node src = entry.source();
             if (src == null) continue;
 
             Resource srcRes = shapesModel.wrapAsResource(src);
-            if (allNodeShapes.contains(srcRes)) {
-                violatedShapes.add(srcRes);
-            } else {
-                // maybe a propertyShape
-                Resource parentNodeShape = propertyShapeToNodeShape.get(srcRes);
-                if (parentNodeShape != null) {
-                    violatedShapes.add(parentNodeShape);
+
+            // Find the main shape that contains this property shape
+            for (Resource mainShape : mainShapes) {
+                if (isPropertyShapeOf(shapesModel, srcRes, mainShape)) {
+                    violatedMainShapes.add(mainShape);
+                    break;
                 }
             }
         }
 
-        // matched = all - violated
-        Set<Resource> matchedShapes = new HashSet<>(allNodeShapes);
-        matchedShapes.removeAll(violatedShapes);
+        // Find satisfied main shapes
+        Set<Resource> satisfiedMainShapes = new HashSet<>(mainShapes);
+        satisfiedMainShapes.removeAll(violatedMainShapes);
 
-        // print
-        System.out.println("\n====== Shapes: violated or matched? ======");
-        if (allNodeShapes.isEmpty()) {
-            System.out.println("No NodeShape found in shapes model.");
+        // Print results
+        System.out.println("Data: " + mode + ", x=" + temperature);
+        System.out.println("Expected shape: " + determineExpectedShape(mode, temperature));
+
+        if (satisfiedMainShapes.isEmpty()) {
+            System.out.println("✗ No shapes are satisfied (data is invalid)");
         } else {
-            System.out.println("All NodeShapes: " + allNodeShapes.size());
-            System.out.println("Violated shapes: " + violatedShapes.size());
-            for (Resource vs : violatedShapes) {
-                System.out.println("  - " + vs.getURI());
-            }
-            System.out.println("Matched (non-violated) shapes: " + matchedShapes.size());
-            for (Resource ms : matchedShapes) {
-                System.out.println("  - " + ms.getURI());
+            System.out.println("✓ Satisfied shapes:");
+            for (Resource shape : satisfiedMainShapes) {
+                String shapeName = shape.getURI().substring(shape.getURI().lastIndexOf("#") + 1);
+                System.out.println("  - " + shapeName);
             }
         }
-        System.out.println("==============================================\n");
+
+        if (!violatedMainShapes.isEmpty()) {
+            System.out.println("✗ Violated shapes:");
+            for (Resource shape : violatedMainShapes) {
+                String shapeName = shape.getURI().substring(shape.getURI().lastIndexOf("#") + 1);
+                System.out.println("  - " + shapeName);
+            }
+        }
     }
 
-    private static Set<Resource> gatherAllNodeShapes(Model shapesModel) {
+    /**
+     * Creates a data model with an Oven in specified mode and temperature
+     */
+    private static Model createDataModel(String mode, int temperature) {
+        Model data = ModelFactory.createDefaultModel();
+        String pre = "http://anonymous.example.org#";
+
+        // Create Oven with specified mode and temperature
+        Resource oven = data.createResource(pre + "Oven");
+        oven.addProperty(RDF.type, data.createResource(pre + "Device"));
+        oven.addProperty(data.createProperty(pre, "mode"), data.createResource(pre + mode));
+        oven.addLiteral(data.createProperty(pre, "x"), temperature);
+
+        // Create realTimeState that references the Oven
+        Resource realTimeState = data.createResource(pre + "realTimeState");
+        realTimeState.addProperty(RDF.type, data.createResource(pre + "State"));
+        realTimeState.addProperty(data.createProperty(pre, "hasOven"), oven);
+
+        return data;
+    }
+
+    private static String determineExpectedShape(String mode, int temperature) {
+        if (mode.equals("OffMode")) {
+            if (temperature <= 180) {
+                return "s11Shape (Off, x≤180)";
+            } else {
+                return "s21Shape (Off, x≥180)";
+            }
+        } else { // OnMode
+            if (temperature <= 180) {
+                return "s12Shape (On, x≤180)";
+            } else {
+                return "s22Shape (On, x≥180)";
+            }
+        }
+    }
+
+    /**
+     * Gather only main shapes (s11Shape, s12Shape, s21Shape, s22Shape)
+     * excluding OvenShapes
+     */
+    private static Set<Resource> gatherMainShapes(Model shapesModel) {
         Set<Resource> results = new HashSet<>();
         Resource nodeShapeClass = shapesModel.createResource("http://www.w3.org/ns/shacl#NodeShape");
+        Property targetClass = shapesModel.createProperty("http://www.w3.org/ns/shacl#targetClass");
+
         ResIterator it = shapesModel.listResourcesWithProperty(RDF.type, nodeShapeClass);
         while (it.hasNext()) {
-            results.add(it.nextResource());
+            Resource shape = it.nextResource();
+            // Only collect shapes with targetClass (main shapes)
+            if (shape.hasProperty(targetClass)) {
+                results.add(shape);
+            }
         }
         it.close();
         return results;
     }
 
-    private static Map<Resource, Resource> mapPropertyShapeToParent(Model shapesModel, Set<Resource> nodeShapes) {
-        Map<Resource, Resource> result = new HashMap<>();
-        Property prop = shapesModel.createProperty("http://www.w3.org/ns/shacl#property");
+    /**
+     * Check if a shape is a property shape of a main shape
+     */
+    private static boolean isPropertyShapeOf(Model model, Resource propertyShape, Resource mainShape) {
+        Property prop = model.createProperty("http://www.w3.org/ns/shacl#property");
+        Property node = model.createProperty("http://www.w3.org/ns/shacl#node");
 
-        for (Resource ns : nodeShapes) {
-            StmtIterator it = shapesModel.listStatements(ns, prop, (RDFNode) null);
-            while (it.hasNext()) {
-                Statement st = it.next();
-                RDFNode obj = st.getObject();
-                if (obj.isResource()) {
-                    result.put(obj.asResource(), ns);
+        StmtIterator it = model.listStatements(mainShape, prop, (RDFNode) null);
+        while (it.hasNext()) {
+            Statement st = it.next();
+            if (st.getObject().isResource()) {
+                Resource propShape = st.getObject().asResource();
+
+                // Check if this property shape references our property shape via sh:node
+                Statement nodeStmt = propShape.getProperty(node);
+                if (nodeStmt != null && nodeStmt.getObject().isResource()) {
+                    if (nodeStmt.getObject().asResource().equals(propertyShape)) {
+                        return true;
+                    }
+                }
+
+                // Also check if this IS the property shape
+                if (propShape.equals(propertyShape)) {
+                    return true;
                 }
             }
-            it.close();
         }
-        return result;
+        it.close();
+        return false;
     }
 }
