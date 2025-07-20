@@ -19,6 +19,7 @@
     <modules>
         <module>Yogurt_example</module>
         <module>Oven_cake</module>
+        <module>emptytank2</module>
     </modules>
 
     <dependencyManagement>
