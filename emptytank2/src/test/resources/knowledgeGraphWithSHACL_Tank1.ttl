@@ -1,0 +1,249 @@
+PREFIX pre:    <http://anonymous.example.org#>
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh:     <http://www.w3.org/ns/shacl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+pre:s4Tank2Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "1.0"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h2
+                     ] .
+
+pre:s4Tank1Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "0.0"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h1
+                     ] .
+
+pre:s4Shape  rdf:type   sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s4Tank2Shape;
+                          sh:path      pre:hasTank2
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s4Tank1Shape;
+                          sh:path      pre:hasTank1
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s3Tank2Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "1.0"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h2
+                     ] .
+
+pre:s3Tank1Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "0.0"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h1
+                     ] .
+
+pre:s3Shape  rdf:type   sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s3Tank2Shape;
+                          sh:path      pre:hasTank2
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s3Tank1Shape;
+                          sh:path      pre:hasTank1
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s2Tank2Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxExclusive  "1.0"^^xsd:double;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minExclusive  "0.1"^^xsd:double;
+                       sh:path          pre:h2
+                     ] .
+
+pre:s2Tank1Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:maxCount      "1"^^xsd:long;
+                       sh:maxExclusive  "1.0"^^xsd:double;
+                       sh:minCount      "1"^^xsd:long;
+                       sh:minExclusive  "0.0"^^xsd:double;
+                       sh:path          pre:h1
+                     ] .
+
+pre:s2Shape  rdf:type   sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s2Tank2Shape;
+                          sh:path      pre:hasTank2
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s2Tank1Shape;
+                          sh:path      pre:hasTank1
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s1Tank2Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "0.1"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h2
+                     ] .
+
+pre:s1Tank1Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OnMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "1.0"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h1
+                     ] .
+
+pre:s1Shape  rdf:type   sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s1Tank2Shape;
+                          sh:path      pre:hasTank2
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s1Tank1Shape;
+                          sh:path      pre:hasTank1
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s0Tank2Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "0.1"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h2
+                     ] .
+
+pre:s0Tank1Shape  rdf:type  sh:NodeShape;
+        sh:property  [ sh:hasValue  pre:OffMode;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:mode
+                     ];
+        sh:property  [ sh:hasValue  "1.0"^^xsd:double;
+                       sh:maxCount  "1"^^xsd:long;
+                       sh:minCount  "1"^^xsd:long;
+                       sh:path      pre:h1
+                     ] .
+
+pre:s0Shape  rdf:type   sh:NodeShape;
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s0Tank2Shape;
+                          sh:path      pre:hasTank2
+                        ];
+        sh:property     [ sh:maxCount  "1"^^xsd:long;
+                          sh:minCount  "1"^^xsd:long;
+                          sh:node      pre:s0Tank1Shape;
+                          sh:path      pre:hasTank1
+                        ];
+        sh:targetClass  pre:State .
+
+pre:s4  rdf:type      pre:State;
+        pre:hasShape  pre:s4Shape;
+        pre:hasTank1  pre:Tank1;
+        pre:hasTank2  pre:Tank2 .
+
+pre:s3  rdf:type      pre:State;
+        pre:hasShape  pre:s3Shape;
+        pre:hasTank1  pre:Tank1;
+        pre:hasTank2  pre:Tank2 .
+
+pre:s2  rdf:type      pre:State;
+        pre:hasShape  pre:s2Shape;
+        pre:hasTank1  pre:Tank1;
+        pre:hasTank2  pre:Tank2 .
+
+pre:s1  rdf:type      pre:State;
+        pre:hasShape  pre:s1Shape;
+        pre:hasTank1  pre:Tank1;
+        pre:hasTank2  pre:Tank2 .
+
+pre:s0  rdf:type      pre:State;
+        pre:hasShape  pre:s0Shape;
+        pre:hasTank1  pre:Tank1;
+        pre:hasTank2  pre:Tank2 .
+
+pre:FlowingOffMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:PipeValve;
+        pre:hasMode    pre:OffMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "h1' = 0, h2' = 0";
+                         pre:endingCondition            "false";
+                         pre:evolutionDomainConstraint  "0 <= h1 <= 1.0 & 0 <= h2 <= 1.0";
+                         pre:evolvingVariable           pre:h2 , pre:h1;
+                         pre:startingCondition          "h1=0 & h2=1"
+                       ] .
+
+pre:FlowingOnMode  rdf:type  pre:ModeRecord;
+        pre:hasDevice  pre:Tank2 , pre:Tank1;
+        pre:hasMode    pre:OnMode;
+        pre:hasODE     [ rdf:type                       pre:ODE;
+                         pre:derivative                 "h1' = -0.0417*sqrt(h1 - h2 + 1), h2' = 0.0417*sqrt(h1 - h2 + 1)";
+                         pre:endingCondition            "h1=0 & h2=1";
+                         pre:evolutionDomainConstraint  "0 <= h1 <= 1.0 & 0 <= h2 <= 1.0";
+                         pre:evolvingVariable           pre:h2 , pre:h1;
+                         pre:startingCondition          "h1=1 & h2=0.1"
+                       ] .
+
+pre:Tank2  rdf:type          schema:Product;
+        schema:capacity      "1200 L";
+        schema:manufacturer  "Tetra Pak Processing Systems";
+        schema:model         "AsepticTank AT‑1500" .
+
+pre:Tank1  rdf:type          schema:Product;
+        schema:capacity      "1200 L";
+        schema:manufacturer  "GEA Group";
+        schema:model         "ProTank VT‑1000" .
