@@ -16,7 +16,7 @@ This repository implements the RDFdL verification pipeline that connects RDF/SHA
 
 ## 3. Running each example
 
-### DrumBoiler visuals
+### Study cases
 ![Case study 1](case_study1.png)
 ![Case study 2](case_study2.png)
 
