@@ -2,7 +2,7 @@
 
 This repository implements the RDFdL verification pipeline that connects RDF/SHACL modelling with differential dynamic logic (dL) proofs to validate Cyber-Physical Systems (CPS).
 
-## 1. Pipeline at a glance
+## 1. Pipeline 
 1. **Model with RDF/SHACL**: Describe CPS components, states, and constraints.
 2. **Reason with Jena**: Infer candidate transitions (e.g., `next`, `ModeChange`) from the validated graph.
 3. **Prove with KeYmaera X**: Generate dL obligations for each transition and send them to KeYmaera X.
@@ -14,7 +14,7 @@ This repository implements the RDFdL verification pipeline that connects RDF/SHA
 - `emptytank2/`: Two-tank continuous system with nonlinear ODEs.
 - `drumboiler/`: End-to-end FMU → RDF/SHACL → dL obligation pipeline for the Modelica DrumBoiler model.
 
-## 3. Running each example
+## 3. how to run each example
 
 ### Study cases
 ![Case study 1](case_study1.png)
