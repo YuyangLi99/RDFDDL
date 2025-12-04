@@ -13,9 +13,12 @@ This repository implements the RDFdL verification pipeline that connects RDF/SHA
 - `Oven_cake/`: Industrial oven temperature control across four states and two modes.
 - `emptytank2/`: Two-tank continuous system with nonlinear ODEs.
 - `drumboiler/`: End-to-end FMU → RDF/SHACL → dL obligation pipeline for the Modelica DrumBoiler model.
-  - Visuals: `case_study1.png`, `case_study2.png` 
 
 ## 3. Running each example
+
+### DrumBoiler visuals
+![Case study 1](case_study1.png)
+![Case study 2](case_study2.png)
 
 ### Yogurt
 - Test entry point: `Yogurt_example/src/test/java/IsNextBuiltinTest.java`
