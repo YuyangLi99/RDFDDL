@@ -1,0 +1,1 @@
+Copy DrumBoiler.fmu into this folder before running the pipeline.

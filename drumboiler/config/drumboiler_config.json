@@ -1,0 +1,106 @@
+{
+  "trackedVariables": ["Ts", "Ps"],
+  "stateShapes": [
+    {
+      "id": "sLowOffShape",
+      "state": "sLowOff",
+      "label": "Low pressure, flow off",
+      "mode": "FlowingOff",
+      "constraints": [
+        { "variable": "Ps", "maxInclusive": 70.0 },
+        { "variable": "Ts", "maxInclusive": 260.0 }
+      ]
+    },
+    {
+      "id": "sLowOnShape",
+      "state": "sLowOn",
+      "label": "Low pressure, flow on",
+      "mode": "FlowingOn",
+      "constraints": [
+        { "variable": "Ps", "maxInclusive": 70.0 },
+        { "variable": "Ts", "maxInclusive": 260.0 }
+      ]
+    },
+    {
+      "id": "sNormalShape",
+      "state": "sNormal",
+      "label": "Normal operating window",
+      "mode": "FlowingOn",
+      "constraints": [
+        { "variable": "Ts", "minInclusive": 260.0, "maxInclusive": 320.0 },
+        { "variable": "Ps", "minInclusive": 70.0, "maxInclusive": 95.0 }
+      ]
+    },
+    {
+      "id": "sHighOnShape",
+      "state": "sHighOn",
+      "label": "High pressure, flow on",
+      "mode": "FlowingOn",
+      "constraints": [
+        { "variable": "Ps", "minInclusive": 95.0 },
+        { "variable": "Ts", "minInclusive": 320.0 }
+      ]
+    },
+    {
+      "id": "sHighIdleShape",
+      "state": "sHighIdle",
+      "label": "High pressure, idle cooldown",
+      "mode": "Idle",
+      "constraints": [
+        { "variable": "Ps", "minInclusive": 95.0 },
+        { "variable": "Ts", "minInclusive": 320.0 }
+      ]
+    }
+  ],
+  "transitions": [
+    { "from": "sLowOff", "to": "sLowOn" },
+    { "from": "sLowOn", "to": "sNormal" },
+    { "from": "sNormal", "to": "sHighOn" },
+    { "from": "sHighOn", "to": "sHighIdle" },
+    { "from": "sHighOn", "to": "sHighOn", "type": "ModeChange" },
+    { "from": "sHighOn", "to": "sHighIdle", "type": "ModeChange" },
+    { "from": "sLowOn", "to": "sLowOff", "type": "ModeChange" }
+  ],
+  "modes": [
+    {
+      "id": "FlowingOn",
+      "label": "Pump/valve active (linearized fit, Ts & Ps only)",
+      "evolutionDomain": "Ps >= 0",
+      "startCondition": "Ps <= 70 & Ts <= 260",
+      "endCondition": "Ps >= 95 & Ts >= 320",
+      "equations": [
+        { "variable": "Ts", "expression": "0.0530 + 0.0000*Ts - 0.0005*Ps" },
+        { "variable": "Ps", "expression": "-0.0508 + 0.0005*Ts - 0.0011*Ps" }
+      ]
+    },
+    {
+      "id": "FlowingOff",
+      "label": "Flow off (derivatives zero)",
+      "evolutionDomain": "Ps >= 0",
+      "startCondition": "Ps <= 70 & Ts <= 260",
+      "endCondition": "Ps >= 70 & Ts >= 260",
+      "equations": [
+        { "variable": "Ts", "expression": "0" },
+        { "variable": "Ps", "expression": "0" }
+      ]
+    },
+    {
+      "id": "Idle",
+      "label": "Pump/valve idle (cooldown)",
+      "evolutionDomain": "Ps >= 0",
+      "startCondition": "Ps >= 95 & Ts >= 320",
+      "endCondition": "Ps < 95 & Ts < 320",
+      "equations": [
+        { "variable": "Ts", "expression": "-0.02*(Ts-25)" },
+        { "variable": "Ps", "expression": "-0.05*(Ps)" }
+      ]
+    }
+  ],
+  "ode": {
+    "evolutionDomain": "Ps >= 0",
+    "equations": [
+      { "variable": "Ts", "expression": "0.0530 + 0.0000*Ts - 0.0005*Ps" },
+      { "variable": "Ps", "expression": "-0.0508 + 0.0005*Ts - 0.0011*Ps" }
+    ]
+  }
+}

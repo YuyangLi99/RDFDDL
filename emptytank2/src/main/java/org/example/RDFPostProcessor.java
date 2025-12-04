@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * RDF Postprocessor for converting generic state relationships into more specific descriptive relationships.
  * This program reads an RDF file, processes state transition relationships, and writes the results to an output file.
- * Modified to work with Oven device states.
+ * Modified to work with Tank1 and Tank2 device states.
  *
  * Usage: Call RDFPostProcessor.processInferenceModel(infModel, outputPath) from your main application.
  */
@@ -33,7 +33,7 @@ public class RDFPostProcessor {
      * @return The processed model with detailed relationships
      */
     public static Model processInferenceModel(Model model, String outputPath) {
-        System.out.println("Starting RDF data processing for Oven system");
+        System.out.println("Starting RDF data processing for Tank system");
 
         try {
             System.out.println("Original model contains " + model.size() + " statements");
@@ -43,13 +43,10 @@ public class RDFPostProcessor {
             outputModel.add(model);
             outputModel.setNsPrefixes(model.getNsPrefixMap());
 
-            // Process each relationship type (only ModeChange exists in the data)
+            // Process each relationship type
             System.out.println("\nProcessing relationships...");
             processModeChangeRelationship(outputModel, MODE_CHANGE, "ModeChange");
-
-            // If you also want to process 'next' relationships, uncomment the following line:
-            // processModeChangeRelationship(outputModel, NEXT, "next");
-            // Note: Based on your RDF, 'next' relationships don't seem to involve mode changes
+            processModeChangeRelationship(outputModel, NEXT, "next");
 
             // Save the processed model if outputPath is provided
             if (outputPath != null && !outputPath.isEmpty()) {
@@ -144,25 +141,37 @@ public class RDFPostProcessor {
     }
 
     private static boolean createDetailedRelationship(Model model, Resource state1, Resource state2) {
-        // Modified query to work with Oven device
+        // Modified query to work with Tank1 and Tank2 devices - exactly matching your SPARQL
         String deviceInfoQuery =
                 "PREFIX sh: <http://www.w3.org/ns/shacl#>\n" +
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX pre: <" + PRE + ">\n" +
                         "SELECT ?state ?deviceType ?device ?deviceMode WHERE {\n" +
                         "  {\n" +
-                        "    ?state pre:hasOven ?device .\n" +
+                        "    ?state pre:hasTank1 ?device .\n" +
                         "    ?stateShape sh:property [\n" +
-                        "      sh:path pre:hasOven ;\n" +
+                        "      sh:path pre:hasTank1 ;\n" +
                         "      sh:node ?deviceShape\n" +
                         "    ] .\n" +
-                        "    BIND(\"Oven\" as ?deviceType)\n" +
+                        "    BIND(\"Tank1\" AS ?deviceType)\n" +
+                        "  }\n" +
+                        "  UNION\n" +
+                        "  {\n" +
+                        "    ?state pre:hasTank2 ?device .\n" +
+                        "    ?stateShape sh:property [\n" +
+                        "      sh:path pre:hasTank2 ;\n" +
+                        "      sh:node ?deviceShape\n" +
+                        "    ] .\n" +
+                        "    BIND(\"Tank2\" AS ?deviceType)\n" +
                         "  }\n" +
                         "  ?state rdf:type pre:State ;\n" +
                         "         pre:hasShape ?stateShape .\n" +
                         "  ?stateShape a sh:NodeShape .\n" +
                         "  ?deviceShape a sh:NodeShape ;\n" +
-                        "    sh:property [ sh:path pre:mode ; sh:hasValue ?deviceMode ] .\n" +
+                        "               sh:property [\n" +
+                        "                 sh:path    pre:mode ;\n" +
+                        "                 sh:hasValue ?deviceMode\n" +
+                        "               ] .\n" +
                         "  FILTER(?state = <" + state1.getURI() + "> || ?state = <" + state2.getURI() + ">)\n" +
                         "}\n" +
                         "ORDER BY ?state ?deviceType";
@@ -361,7 +370,7 @@ public class RDFPostProcessor {
         StmtIterator labelIter = model.listStatements(null, rdfsLabel, (RDFNode)null);
 
         int exampleCount = 0;
-        while (labelIter.hasNext() && exampleCount < 5) {
+        while (labelIter.hasNext() && exampleCount < 10) {
             Statement labelStmt = labelIter.next();
             Resource predicate = labelStmt.getSubject();
 
@@ -374,7 +383,7 @@ public class RDFPostProcessor {
                 StmtIterator predIter = model.listStatements(null, ResourceFactory.createProperty(predicate.getURI()), (RDFNode)null);
                 if (predIter.hasNext()) {
                     Statement usage = predIter.next();
-                    System.out.println(usage.getSubject().getLocalName() + " " +
+                    System.out.println("  " + usage.getSubject().getLocalName() + " " +
                             getLocalName(predicate.getURI()) + " " +
                             usage.getObject().asResource().getLocalName() +
                             " (" + labelStmt.getObject().toString() + ")");

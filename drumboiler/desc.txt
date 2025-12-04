@@ -1,0 +1,5 @@
+﻿Drum boiler with steam temperature TS [degC], steam pressure pS [bar], liquid volume Vl [m3].
+We want a low-pressure startup state, a normal operating state, and a high-pressure state.
+Low: pS ≤ 70bar, TS ≤ 260degC.
+Normal: 70–95bar, 250–320degC, Vl 5–15m3.
+High: pS ≥ 95bar, TS ≥ 320degC.

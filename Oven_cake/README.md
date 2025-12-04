@@ -25,7 +25,7 @@ The system uses custom Apache Jena `Builtin` functions to infer valid transition
 There are two types of transitions:
 
 ## Modelica Simulation ⚙️
-The Ordinary Differential Equations (ODEs) used in this example were derived from a Modelica simulation model. The simulation file is located at: `D:\RDFDDL-main\Oven_cake\Simulation_Modelica\Oven.mo`.
+The Ordinary Differential Equations (ODEs) used in this example were derived from a Modelica simulation model. The simulation file is located at: `Oven_cake/Simulation_Modelica/Oven.mo`.
 
 ### a. Continuous Transition (`isNext`)
 This transition occurs when the oven remains in the same mode but crosses the 180°C temperature threshold.
@@ -69,7 +69,7 @@ This transition occurs when the oven switches modes while the temperature remain
 
 ## Output
 
-The reasoning process generates two Turtle (`.ttl`) files. Based on the test configuration in `IsNextBuiltinTest.java`, these files will be saved to the `D:\TTL2\` directory.
+The reasoning process generates two Turtle (`.ttl`) files. Based on the test configuration in `IsNextBuiltinTest.java`, these files will be saved to `target/ttl/`.
 
 -   **`knowledgeGraphWithSHACL_oven_safe.ttl`**
     This is the initial knowledge graph *before* post-processing. It contains:

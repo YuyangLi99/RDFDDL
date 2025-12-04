@@ -21,6 +21,9 @@ import org.junit.Test;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.jena.query.Dataset;
@@ -30,6 +33,7 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.XSD;
+
 
 import org.apache.jena.shacl.*;
 
@@ -45,7 +49,6 @@ public class IsNextBuiltinTest {
         //=================================================
         // 1) create Dataset + default model
         //=================================================
-
 
         Dataset dataset = DatasetFactory.create();
         Model model = dataset.getDefaultModel();
@@ -67,8 +70,9 @@ public class IsNextBuiltinTest {
         String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
         String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
         String schema = "http://schema.org/";
+        String foaf = "http://xmlns.com/foaf/0.1/";
         model.setNsPrefix("ex", schema);
-        model.setNsPrefix("foaf", "http://xmlns.com/foaf/0.1/");
+        model.setNsPrefix("foaf", foaf);
         model.setNsPrefix("xsd", XSD.getURI());
         model.setNsPrefix("pre",pre);
         model.setNsPrefix("rdf", rdf);
@@ -112,7 +116,19 @@ public class IsNextBuiltinTest {
         Property hasShape = model.createProperty(pre, "hasShape");
         Property hasDeviceMode = model.createProperty(pre, "hasDeviceMode");
 
-
+        // NEW PROPERTIES
+        Property initialState = model.createProperty(pre, "initialState");
+        Property goalState = model.createProperty(pre, "goalState");
+        Property hasButton = model.createProperty(pre, "hasButton");
+        Property serviceTechnician = model.createProperty(pre, "serviceTechnician");
+        Property label = model.createProperty(pre, "label");
+        Property triggerTransition = model.createProperty(pre, "trigger_transition");
+        Property forDevice = model.createProperty(pre, "forDevice");
+        Property jobTitle = model.createProperty(schema, "jobTitle");
+        Property worksFor = model.createProperty(schema, "worksFor");
+        Property operatesProcess = model.createProperty(pre, "operatesProcess");
+        Property operatesEquipment = model.createProperty(pre, "operatesEquipment");
+        Property hasEquipment = model.createProperty(pre, "hasEquipment");
 
         Property hasPossibleModeProp = model.createProperty(pre, "hasPossibleMode");
 
@@ -129,6 +145,12 @@ public class IsNextBuiltinTest {
         Resource offMode = model.createResource(pre + "OffMode");
 
         Resource ODE = model.createResource(pre + "ODE");
+
+        // NEW RESOURCES
+        Resource Button = model.createResource(pre + "Button");
+        // FOAF properties - define before using them
+        Property foafName = model.createProperty(foaf, "name");
+        Resource foafPerson = model.createResource(foaf + "Person");
 
         //Heater OnMode
         Resource HeaterOnMode = model.createResource(pre + "HeaterOnMode");
@@ -165,6 +187,21 @@ public class IsNextBuiltinTest {
         Heater.addProperty(capacity, "5000L");
         Heater.addProperty(temperatureRange, "Up to 100°C");
 
+        // NEW - Add button and technician to Heater
+        Resource HeaterStartBtn = model.createResource(pre + "HeaterStartBtn");
+        HeaterStartBtn.addProperty(RDF.type, Button);
+        HeaterStartBtn.addProperty(label, "Heater START");
+        HeaterStartBtn.addProperty(triggerTransition, model.createResource("http://example.org/states#Heater_OnMode_to_OffMode_and_Homogenizer_OnMode_to_OffMode"));
+        HeaterStartBtn.addProperty(forDevice, Heater);
+
+        Resource TechAlice = model.createResource(pre + "TechAlice");
+        TechAlice.addProperty(RDF.type, foafPerson);
+        TechAlice.addProperty(foafName, "Alice Müller");
+        TechAlice.addProperty(jobTitle, "Senior Service Technician");
+        TechAlice.addProperty(worksFor, model.createResource(pre + "YogurtFactory"));
+
+        Heater.addProperty(hasButton, HeaterStartBtn);
+        Heater.addProperty(serviceTechnician, TechAlice);
 
         Resource HomogenizerOnMode = model.createResource(pre + "HomogenizerOnMode");
         HomogenizerOnMode.addProperty(RDF.type, ModeRecord);
@@ -199,7 +236,6 @@ public class IsNextBuiltinTest {
         Homogenizer.addProperty(pressureRange, "Up to 300 bar");
         Homogenizer.addProperty(a, Device);
 
-
         Resource PasteurizationOnMode = model.createResource(pre + "PasteurizationOnMode");
         PasteurizationOnMode.addProperty(RDF.type, ModeRecord);
         PasteurizationOnMode.addProperty(hasMode, onMode);
@@ -227,12 +263,10 @@ public class IsNextBuiltinTest {
         PasteurizationOffODE.addProperty(evolvingVariable, model.createResource(pre + "x"));
         PasteurizationOffMode.addProperty(hasODE, PasteurizationOffODE);
 
-
         Pasteurizer.addProperty(name, "Industrial Pasteurizer");
         Pasteurizer.addProperty(manufacturer, "Pasteurizer Corp.");
         Pasteurizer.addProperty(modelNumber, "IP-3000");
         Pasteurizer.addProperty(capacity, "3000L");
-
 
         Resource CoolerOnMode = model.createResource(pre + "CoolerOnMode");
         CoolerOnMode.addProperty(RDF.type, ModeRecord);
@@ -265,20 +299,19 @@ public class IsNextBuiltinTest {
         Cooler.addProperty(modelNumber, "IC-1500");
         Cooler.addProperty(capacity, "1500L");
 
-
         // factory
         Resource yogurtFactory = model.createResource(pre + "YogurtFactory");
         yogurtFactory.addProperty(a, model.createResource(schema + "Organization"));
         yogurtFactory.addProperty(name, "Yogurt Production Ltd.");
         yogurtFactory.addProperty(address, "123 Dairy Lane, Milk City, Country");
-        yogurtFactory.addProperty(model.createProperty(pre, "hasEquipment"), Heater);
-        yogurtFactory.addProperty(model.createProperty(pre, "hasEquipment"), Homogenizer);
+        yogurtFactory.addProperty(hasEquipment, Heater);
+        yogurtFactory.addProperty(hasEquipment, Homogenizer);
 
         // Process
         Resource yogurtProduction = model.createResource(pre + "YogurtProductionProcess");
         yogurtProduction.addProperty(a, model.createResource(schema + "Process"));
         yogurtProduction.addProperty(name, "Yogurt Production Process");
-        yogurtFactory.addProperty(model.createProperty(pre, "operatesProcess"), yogurtProduction);
+        yogurtFactory.addProperty(operatesProcess, yogurtProduction);
 
         // manufacturing steps
         Resource heatingStep = model.createResource(pre + "HeatingStep");
@@ -346,9 +379,8 @@ public class IsNextBuiltinTest {
         Resource operator = model.createResource(pre + "Operator");
         operator.addProperty(a, model.createResource(schema + "Person"));
         operator.addProperty(name, "John Doe");
-        operator.addProperty(model.createProperty(pre, "operatesEquipment"), Heater);
-        operator.addProperty(model.createProperty(pre, "operatesEquipment"), Homogenizer);
-
+        operator.addProperty(operatesEquipment, Heater);
+        operator.addProperty(operatesEquipment, Homogenizer);
 
         String shNS = "http://www.w3.org/ns/shacl#";
 
@@ -363,9 +395,17 @@ public class IsNextBuiltinTest {
         Property shTargetClass = model.createProperty(shNS, "targetClass");
         Property shNode = model.createProperty(shNS, "node");
 
-        //Create Researce
-
+        //Create Resource
         Resource State = model.createResource(pre + "State");
+
+        // NEW - Add property definitions for initialState and goalState
+        initialState.addProperty(RDF.type, RDF.Property);
+        initialState.addProperty(model.createProperty(rdfs, "domain"), model.createResource(schema + "Process"));
+        initialState.addProperty(model.createProperty(rdfs, "range"), State);
+
+        goalState.addProperty(RDF.type, RDF.Property);
+        goalState.addProperty(model.createProperty(rdfs, "domain"), model.createResource(schema + "Process"));
+        goalState.addProperty(model.createProperty(rdfs, "range"), State);
 
         // state is defined as ：
         // ex:s112 a ex:State ;
@@ -377,8 +417,9 @@ public class IsNextBuiltinTest {
         s112.addProperty(hasHeater, Heater);
         s112.addProperty(hasHomogenizer, Homogenizer);
         s112.addProperty(hasShape, model.createResource(pre + "s112Shape"));
-//        s112.addProperty(hasDeviceMode, model.createResource(pre+"HeaterOnMode"));
-//        s112.addProperty(hasDeviceMode, model.createResource(pre+"HomogenizerOffMode"));
+
+        // NEW - Add initial and goal states to the process
+        yogurtProduction.addProperty(initialState, s112);
 
         // --- s112: Heater=On, Homogenizer=Off, x<=55, p<=10
 
@@ -466,8 +507,6 @@ public class IsNextBuiltinTest {
         s122.addProperty(hasHeater, Heater);
         s122.addProperty(hasHomogenizer, Homogenizer);
         s122.addProperty(hasShape, model.createResource(pre + "s122Shape"));
-//        s122.addProperty(hasDeviceMode, model.createResource(pre+"HeaterOffMode"));
-//        s122.addProperty(hasDeviceMode, model.createResource(pre+"HomogenizerOffMode"));
 
         // --- s122: Heater=Off, Homogenizer=Off, x<=55, p<=10
 
@@ -537,8 +576,6 @@ public class IsNextBuiltinTest {
         s122Shape.addProperty(shProperty, stateHeaterShapeProp);
         s122Shape.addProperty(shProperty, stateHomogenizerShapeProp);
 
-
-
         //=================================================
         // create state s211，
         // --- s211: Heater=On, Homogenizer=On, x>=55, p<=10
@@ -553,8 +590,6 @@ public class IsNextBuiltinTest {
         s211.addProperty(hasHeater, Heater);
         s211.addProperty(hasHomogenizer, Homogenizer);
         s211.addProperty(hasShape, model.createResource(pre + "s211Shape"));
-//        s211.addProperty(hasDeviceMode, model.createResource(pre+"HeaterOnMode"));
-//        s211.addProperty(hasDeviceMode, model.createResource(pre+"HomogenizerOnMode"));
 
         // --- s211: Heater=On, Homogenizer=On, x>=55, p<=10
 
@@ -649,8 +684,6 @@ public class IsNextBuiltinTest {
         s212.addProperty(hasHeater, Heater);
         s212.addProperty(hasHomogenizer, Homogenizer);
         s212.addProperty(hasShape, model.createResource(pre + "s212Shape"));
-//        s212.addProperty(hasDeviceMode, model.createResource(pre+"HeaterOnMode"));
-//        s212.addProperty(hasDeviceMode, model.createResource(pre+"HomogenizerOffMode"));
 
 // --- s212: Heater=On, Homogenizer=Off, x>=55, p<=10
 
@@ -732,7 +765,6 @@ public class IsNextBuiltinTest {
         s222.addProperty(hasHeater, Heater);
         s222.addProperty(hasHomogenizer, Homogenizer);
         s222.addProperty(hasShape, model.createResource(pre + "s222Shape"));
-
 
 // --- s222: Heater=Off, Homogenizer=Off, x>=55, p<=10
 
@@ -882,7 +914,6 @@ public class IsNextBuiltinTest {
         s322Shape.addProperty(shProperty, stateHeaterShapeProp_s322);
         s322Shape.addProperty(shProperty, stateHomogenizerShapeProp_s322);
 
-
         //=================================================
         // create state s311
         // Heater=On, Homogenizer=On
@@ -894,8 +925,6 @@ public class IsNextBuiltinTest {
         s311.addProperty(hasHeater, Heater);
         s311.addProperty(hasHomogenizer, Homogenizer);
         s311.addProperty(hasShape, model.createResource(pre + "s311Shape"));
-//        s311.addProperty(hasDeviceMode, model.createResource(pre+"HeaterOnMode"));
-//        s311.addProperty(hasDeviceMode, model.createResource(pre+"HomogenizerOnMode"));
 
 // s311: Heater=On, Homogenizer=On, x ∈ [55, 65], p ∈ [10, 20]
 
@@ -960,7 +989,6 @@ public class IsNextBuiltinTest {
         s311Shape.addProperty(shProperty, stateHeaterShapeProp_s311);
         s311Shape.addProperty(shProperty, stateHomogenizerShapeProp_s311);
 
-
         //=================================================
 // create state s312
 // Heater=On, Homogenizer=Off
@@ -972,8 +1000,6 @@ public class IsNextBuiltinTest {
         s312.addProperty(hasHeater, Heater);
         s312.addProperty(hasHomogenizer, Homogenizer);
         s312.addProperty(hasShape, model.createResource(pre + "s312Shape"));
-//        s312.addProperty(hasDeviceMode, model.createResource(pre+"HeaterOnMode"));
-//        s312.addProperty(hasDeviceMode, model.createResource(pre+"HomogenizerOffMode"));
 
 // s312: Heater=On, Homogenizer=Off, x ∈ [55, 65], p ∈ [10, 20]
 
@@ -1038,8 +1064,6 @@ public class IsNextBuiltinTest {
         s312Shape.addProperty(shProperty, stateHeaterShapeProp_s312);
         s312Shape.addProperty(shProperty, stateHomogenizerShapeProp_s312);
 
-
-
         //------------------- s412 -----------------------
 
         //=================================================
@@ -1053,8 +1077,6 @@ public class IsNextBuiltinTest {
 //  hasPasteurizer Pasteurizer
         s412.addProperty(model.createProperty(pre, "hasPasteurizer"), Pasteurizer);
         s412.addProperty(hasShape, model.createResource(pre + "s412Shape"));
-//        s412.addProperty(hasDeviceMode, model.createResource(pre+"PasteurizationOnMode"));
-
 
 // s412: Pasteurization=On, x ∈ [65, 90], p ≤ 10
 
@@ -1110,8 +1132,6 @@ public class IsNextBuiltinTest {
         s422.addProperty(RDF.type, State);
         s422.addProperty(model.createProperty(pre, "hasPasteurizer"), Pasteurizer);
         s422.addProperty(hasShape, model.createResource(pre + "s422Shape"));
-//        s422.addProperty(hasDeviceMode, model.createResource(pre+"PasteurizationOffMode"));
-
 
 // s422: Pasteurization=Off, x ∈ [65, 90], p ≤ 10
 
@@ -1167,7 +1187,6 @@ public class IsNextBuiltinTest {
         s512.addProperty(RDF.type, State);
         s512.addProperty(model.createProperty(pre, "hasPasteurizer"), Pasteurizer);
         s512.addProperty(hasShape, model.createResource(pre + "s512Shape"));
-//        s512.addProperty(hasDeviceMode, model.createResource(pre+"PasteurizationOnMode"));
 
 // s512: Pasteurization=On, x ∈ [90, 95], p ≤ 10
 
@@ -1224,7 +1243,6 @@ public class IsNextBuiltinTest {
         s522.addProperty(RDF.type, State);
         s522.addProperty(model.createProperty(pre, "hasPasteurizer"), Pasteurizer);
         s522.addProperty(hasShape, model.createResource(pre + "s522Shape"));
-//        s522.addProperty(hasDeviceMode, model.createResource(pre+"PasteurizationOffMode"));
 
 // s522: Pasteurization=Off, x ∈ [90, 95], p ≤ 10
 
@@ -1280,7 +1298,6 @@ public class IsNextBuiltinTest {
         s612.addProperty(RDF.type, State);
         s612.addProperty(model.createProperty(pre, "hasCooler"), Cooler);
         s612.addProperty(hasShape, model.createResource(pre + "s612Shape"));
-//        s612.addProperty(hasDeviceMode, model.createResource(pre+"CoolerOnMode"));
 
 // s612: Cooler=On, x ∈ [40, 45], p ≤ 10
 
@@ -1325,7 +1342,6 @@ public class IsNextBuiltinTest {
 
         s612Shape.addProperty(shProperty, stateCoolerShapeProp_s612);
 
-
         //=================================================
 // create state s622
 // Cooler = Off
@@ -1339,7 +1355,6 @@ public class IsNextBuiltinTest {
 
         s622.addProperty(model.createProperty(pre, "hasCooler"), Cooler);
         s622.addProperty(hasShape, model.createResource(pre + "s622Shape"));
-//        s622.addProperty(hasDeviceMode, model.createResource(pre+"CoolerOffMode"));
 
 // s622: Cooler=Off, x ∈ [40, 45], p ≤ 10
 
@@ -1385,6 +1400,8 @@ public class IsNextBuiltinTest {
 
         s622Shape.addProperty(shProperty, stateCoolerShapeProp_s622);
 
+        // NEW - Set s622 as the goal state
+        yogurtProduction.addProperty(goalState, s622);
 
         IsNextBuiltin isNextBuiltin = new IsNextBuiltin(dataset);
         BuiltinRegistry.theRegistry.register(isNextBuiltin);
@@ -1398,14 +1415,10 @@ public class IsNextBuiltinTest {
         ModeChange3 modeChange3 = new ModeChange3(dataset);
         BuiltinRegistry.theRegistry.register(modeChange3);
 
-
         ModeChange4 modeChange4 = new ModeChange4(dataset);
         BuiltinRegistry.theRegistry.register(modeChange4);
 
-
-
-
-          // [rule1: (?a ex:next ?b) <- isNext(?a, ?b), ?a a ex:state, ?b a ex:state ]
+        // [rule1: (?a ex:next ?b) <- isNext(?a, ?b), ?a a ex:state, ?b a ex:state ]
         String rules1 = "[rule1: (?a " + nextpredicate + " ?b) <- "
                 + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
                 + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
@@ -1413,10 +1426,10 @@ public class IsNextBuiltinTest {
                 "]";
 
         String rules2 =   "[rule2: (?a " + ModeChange +  " ?b) <- "
-            + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
-            + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
-            + "mode_change(?a, ?b)"
-            + "]";
+                + "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
+                + "(?b <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) "
+                + "mode_change(?a, ?b)"
+                + "]";
 
         String rules3 = "[rule3: (?a " + ModeChange2 +  " ?b) <- " +
                 "(?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://anonymous.example.org#State>) " +
@@ -1436,7 +1449,6 @@ public class IsNextBuiltinTest {
                 "mode_change4(?a, ?b)" +
                 "]";
 
-
         String combinedRules = rules1+ rules2 + rules3 + rules4+ rules5 ;
 
         List<Rule> allRules = Rule.parseRules(combinedRules);
@@ -1446,7 +1458,6 @@ public class IsNextBuiltinTest {
 
         InfModel inf = ModelFactory.createInfModel(reasoner, model);
 
-
         StmtIterator iterBefore = model.listStatements();
         while (iterBefore.hasNext()) {
             Statement st = iterBefore.nextStatement();
@@ -1455,11 +1466,13 @@ public class IsNextBuiltinTest {
             RDFNode   object    = st.getObject();
 
             System.out.println(subject + " " + predicate + " " + object);
-
         }
 
-        String originalOutputPath = "D:\\TTL\\knowledgeGraphWithSHACL_original2.ttl";
-        try (FileOutputStream out = new FileOutputStream(originalOutputPath)) {
+        Path outputDir = Paths.get("target", "ttl");
+        Files.createDirectories(outputDir);
+
+        Path originalOutputPath = outputDir.resolve("knowledgeGraphWithSHACL_original2.ttl");
+        try (FileOutputStream out = new FileOutputStream(originalOutputPath.toFile())) {
             RDFDataMgr.write(out, inf, RDFFormat.TRIG_PRETTY);
             System.out.println("The knowledge graph with original relationships has been written to: " + originalOutputPath);
         } catch (IOException e) {
@@ -1467,13 +1480,9 @@ public class IsNextBuiltinTest {
         }
 
         // Process the inference model to create detailed relationships
-        String processedOutputPath = "D:\\TTL\\knowledgeGraphWithSHACL_processed2.ttl";
-        RDFPostProcessor.processInferenceModel(inf, processedOutputPath);
+        Path processedOutputPath = outputDir.resolve("knowledgeGraphWithSHACL_processed2.ttl");
+        RDFPostProcessor.processInferenceModel(inf, processedOutputPath.toString());
 
         System.out.println("Processing complete. Both original and processed knowledge graphs have been saved.");
-
-
-
     }
-
 }

@@ -1,0 +1,8 @@
+# IDE and build outputs
+.idea/
+*.iml
+target/
+build/
+
+# Maven
+*.log

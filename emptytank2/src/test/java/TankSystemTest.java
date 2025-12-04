@@ -15,6 +15,9 @@ import org.apache.jena.vocabulary.XSD;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class TankSystemTest {
@@ -364,9 +367,12 @@ public class TankSystemTest {
         }
 
         // Write TTL output
-        try (FileOutputStream out = new FileOutputStream("D:\\TTL2\\knowledgeGraphWithSHACL_Tank1_IsNext_Test.ttl")) {
+        Path outputDir = Paths.get("target", "ttl");
+        Files.createDirectories(outputDir);
+        Path outputPath = outputDir.resolve("knowledgeGraphWithSHACL_Tank1_IsNext_Test.ttl");
+        try (FileOutputStream out = new FileOutputStream(outputPath.toFile())) {
             RDFDataMgr.write(out, inf, RDFFormat.TURTLE_PRETTY);
-            System.out.println("Tank system knowledge graph has been successfully written to: D:\\TTL2\\knowledgeGraphWithSHACL_Tank1.ttl");
+            System.out.println("Tank system knowledge graph has been successfully written to: " + outputPath);
         } catch (IOException e) {
             e.printStackTrace();
         }

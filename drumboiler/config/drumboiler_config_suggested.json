@@ -1,0 +1,66 @@
+{
+  "trackedVariables" : [ "Ps", "Vl", "qmS", "Ts" ],
+  "stateShapes" : [ {
+    "id" : "sLowPressureShape",
+    "state" : "sLowPressure",
+    "label" : "Low pressure region",
+    "constraints" : [ {
+      "variable" : "Ps",
+      "maxInclusive" : 70.0
+    }, {
+      "variable" : "Ts",
+      "maxInclusive" : 260.0
+    } ]
+  }, {
+    "id" : "sNormalShape",
+    "state" : "sNormal",
+    "label" : "Nominal operation",
+    "constraints" : [ {
+      "variable" : "Ts",
+      "minInclusive" : 250.0,
+      "maxInclusive" : 320.0
+    }, {
+      "variable" : "Ps",
+      "minInclusive" : 70.0,
+      "maxInclusive" : 95.0
+    }, {
+      "variable" : "Vl",
+      "minInclusive" : 5.0,
+      "maxInclusive" : 15.0
+    } ]
+  }, {
+    "id" : "sHighPressureShape",
+    "state" : "sHighPressure",
+    "label" : "High pressure region",
+    "constraints" : [ {
+      "variable" : "Ps",
+      "minInclusive" : 95.0
+    }, {
+      "variable" : "Ts",
+      "minInclusive" : 320.0
+    } ]
+  } ],
+  "transitions" : [ {
+    "from" : "sLowPressure",
+    "to" : "sNormal"
+  }, {
+    "from" : "sNormal",
+    "to" : "sHighPressure"
+  } ],
+  "ode" : {
+    "evolutionDomain" : "Ps >= 0 & Vl >= 0",
+    "equations" : [ {
+      "variable" : "Ts",
+      "expression" : "-0.05*(Ts-320) + 0.01*(Ps-90)"
+    }, {
+      "variable" : "Ps",
+      "expression" : "0.02*(Ts-300) - 0.03*(Ps-95)"
+    }, {
+      "variable" : "Vl",
+      "expression" : "-0.001*qmS"
+    }, {
+      "variable" : "qmS",
+      "expression" : "0"
+    } ]
+  }
+}
