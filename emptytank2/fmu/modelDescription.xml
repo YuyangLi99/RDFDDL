@@ -1,0 +1,2559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription
+  fmiVersion="2.0"
+  modelName="Modelica.Fluid.Examples.Tanks.EmptyTanks"
+  guid="{96f0d07c-00a6-4dae-b92b-4c38da771dd9}"
+  description="Show the treatment of empty tanks"
+  generationTool="OpenModelica Compiler OpenModelica v1.23.1 (64-bit)"
+  generationDateAndTime="2025-12-08T15:59:16Z"
+  variableNamingConvention="structured"
+  numberOfEventIndicators="4">
+  <ModelExchange
+    modelIdentifier="EmptyTanks">
+    <SourceFiles>
+      <File name="EmptyTanks.c" />
+      <File name="EmptyTanks_functions.c" />
+      <File name="EmptyTanks_records.c" />
+      <File name="EmptyTanks_01exo.c" />
+      <File name="EmptyTanks_02nls.c" />
+      <File name="EmptyTanks_03lsy.c" />
+      <File name="EmptyTanks_04set.c" />
+      <File name="EmptyTanks_05evt.c" />
+      <File name="EmptyTanks_06inz.c" />
+      <File name="EmptyTanks_07dly.c" />
+      <File name="EmptyTanks_08bnd.c" />
+      <File name="EmptyTanks_09alg.c" />
+      <File name="EmptyTanks_10asr.c" />
+      <File name="EmptyTanks_11mix.c" />
+      <File name="EmptyTanks_12jac.c" />
+      <File name="EmptyTanks_13opt.c" />
+      <File name="EmptyTanks_14lnz.c" />
+      <File name="EmptyTanks_15syn.c" />
+      <File name="EmptyTanks_16dae.c" />
+      <File name="EmptyTanks_17inl.c" />
+      <File name="EmptyTanks_18spd.c" />
+      <File name="EmptyTanks_init_fmu.c" />
+      <File name="EmptyTanks_FMU.c" />
+      <File name="./gc/memory_pool.c" />
+      <File name="./gc/omc_gc.c" />
+      <File name="./util/base_array.c" />
+      <File name="./util/boolean_array.c" />
+      <File name="./util/context.c" />
+      <File name="./util/division.c" />
+      <File name="./util/doubleEndedList.c" />
+      <File name="./util/generic_array.c" />
+      <File name="./util/index_spec.c" />
+      <File name="./util/integer_array.c" />
+      <File name="./util/list.c" />
+      <File name="./util/modelica_string_lit.c" />
+      <File name="./util/modelica_string.c" />
+      <File name="./util/ModelicaUtilities.c" />
+      <File name="./util/omc_error.c" />
+      <File name="./util/omc_file.c" />
+      <File name="./util/omc_init.c" />
+      <File name="./util/omc_mmap.c" />
+      <File name="./util/omc_msvc.c" />
+      <File name="./util/omc_numbers.c" />
+      <File name="./util/parallel_helper.c" />
+      <File name="./util/rational.c" />
+      <File name="./util/real_array.c" />
+      <File name="./util/ringbuffer.c" />
+      <File name="./util/simulation_options.c" />
+      <File name="./util/string_array.c" />
+      <File name="./util/utility.c" />
+      <File name="./util/varinfo.c" />
+      <File name="./math-support/pivot.c" />
+      <File name="./simulation/jacobian_util.c" />
+      <File name="./simulation/omc_simulation_util.c" />
+      <File name="./simulation/options.c" />
+      <File name="./simulation/simulation_info_json.c" />
+      <File name="./simulation/simulation_omc_assert.c" />
+      <File name="./simulation/solver/delay.c" />
+      <File name="./simulation/solver/fmi_events.c" />
+      <File name="./simulation/solver/model_help.c" />
+      <File name="./simulation/solver/omc_math.c" />
+      <File name="./simulation/solver/spatialDistribution.c" />
+      <File name="./simulation/solver/stateset.c" />
+      <File name="./simulation/solver/synchronous.c" />
+      <File name="./simulation/solver/initialization/initialization.c" />
+      <File name="./meta/meta_modelica_catch.c" />
+      <File name="./simulation/solver/nonlinearSolverHomotopy.c" />
+      <File name="./simulation/solver/nonlinearSolverHybrd.c" />
+      <File name="./simulation/solver/nonlinearValuesList.c" />
+      <File name="./simulation/solver/nonlinearSystem.c" />
+      <File name="./external_solvers/dgesv.c" />
+      <File name="./external_solvers/dgetrf.c" />
+      <File name="./external_solvers/dlamch.c" />
+      <File name="./external_solvers/ilaenv.c" />
+      <File name="./external_solvers/xerbla.c" />
+      <File name="./external_solvers/dgetf2.c" />
+      <File name="./external_solvers/dgetrs.c" />
+      <File name="./external_solvers/dlaswp.c" />
+      <File name="./external_solvers/ieeeck.c" />
+      <File name="./external_solvers/iparmq.c" />
+      <File name="./external_solvers/dgemm.c" />
+      <File name="./external_solvers/dger.c" />
+      <File name="./external_solvers/dscal.c" />
+      <File name="./external_solvers/dswap.c" />
+      <File name="./external_solvers/dtrsm.c" />
+      <File name="./external_solvers/idamax.c" />
+      <File name="./external_solvers/lsame.c" />
+      <File name="./external_solvers/i_nint.c" />
+      <File name="./external_solvers/pow_di.c" />
+      <File name="./external_solvers/s_cmp.c" />
+      <File name="./external_solvers/s_copy.c" />
+      <File name="./external_solvers/enorm_.c" />
+      <File name="./external_solvers/hybrj_.c" />
+      <File name="./external_solvers/dpmpar_.c" />
+      <File name="./external_solvers/qrfac_.c" />
+      <File name="./external_solvers/qform_.c" />
+      <File name="./external_solvers/dogleg_.c" />
+      <File name="./external_solvers/r1updt_.c" />
+      <File name="./external_solvers/r1mpyq_.c" />
+    </SourceFiles>
+  </ModelExchange>
+  <CoSimulation
+    modelIdentifier="EmptyTanks"
+    needsExecutionTool="false"
+    canHandleVariableCommunicationStepSize="true"
+    canInterpolateInputs="true"
+    maxOutputDerivativeOrder="1"
+    canRunAsynchronuously = "false"
+    canBeInstantiatedOnlyOncePerProcess="false"
+    canNotUseMemoryManagementFunctions="false"
+    canGetAndSetFMUstate="false"
+    canSerializeFMUstate="false"
+    providesDirectionalDerivative="false">
+    <SourceFiles>
+      <File name="EmptyTanks.c" />
+      <File name="EmptyTanks_functions.c" />
+      <File name="EmptyTanks_records.c" />
+      <File name="EmptyTanks_01exo.c" />
+      <File name="EmptyTanks_02nls.c" />
+      <File name="EmptyTanks_03lsy.c" />
+      <File name="EmptyTanks_04set.c" />
+      <File name="EmptyTanks_05evt.c" />
+      <File name="EmptyTanks_06inz.c" />
+      <File name="EmptyTanks_07dly.c" />
+      <File name="EmptyTanks_08bnd.c" />
+      <File name="EmptyTanks_09alg.c" />
+      <File name="EmptyTanks_10asr.c" />
+      <File name="EmptyTanks_11mix.c" />
+      <File name="EmptyTanks_12jac.c" />
+      <File name="EmptyTanks_13opt.c" />
+      <File name="EmptyTanks_14lnz.c" />
+      <File name="EmptyTanks_15syn.c" />
+      <File name="EmptyTanks_16dae.c" />
+      <File name="EmptyTanks_17inl.c" />
+      <File name="EmptyTanks_18spd.c" />
+      <File name="EmptyTanks_init_fmu.c" />
+      <File name="EmptyTanks_FMU.c" />
+      <File name="./gc/memory_pool.c" />
+      <File name="./gc/omc_gc.c" />
+      <File name="./util/base_array.c" />
+      <File name="./util/boolean_array.c" />
+      <File name="./util/context.c" />
+      <File name="./util/division.c" />
+      <File name="./util/doubleEndedList.c" />
+      <File name="./util/generic_array.c" />
+      <File name="./util/index_spec.c" />
+      <File name="./util/integer_array.c" />
+      <File name="./util/list.c" />
+      <File name="./util/modelica_string_lit.c" />
+      <File name="./util/modelica_string.c" />
+      <File name="./util/ModelicaUtilities.c" />
+      <File name="./util/omc_error.c" />
+      <File name="./util/omc_file.c" />
+      <File name="./util/omc_init.c" />
+      <File name="./util/omc_mmap.c" />
+      <File name="./util/omc_msvc.c" />
+      <File name="./util/omc_numbers.c" />
+      <File name="./util/parallel_helper.c" />
+      <File name="./util/rational.c" />
+      <File name="./util/real_array.c" />
+      <File name="./util/ringbuffer.c" />
+      <File name="./util/simulation_options.c" />
+      <File name="./util/string_array.c" />
+      <File name="./util/utility.c" />
+      <File name="./util/varinfo.c" />
+      <File name="./math-support/pivot.c" />
+      <File name="./simulation/jacobian_util.c" />
+      <File name="./simulation/omc_simulation_util.c" />
+      <File name="./simulation/options.c" />
+      <File name="./simulation/simulation_info_json.c" />
+      <File name="./simulation/simulation_omc_assert.c" />
+      <File name="./simulation/solver/delay.c" />
+      <File name="./simulation/solver/fmi_events.c" />
+      <File name="./simulation/solver/model_help.c" />
+      <File name="./simulation/solver/omc_math.c" />
+      <File name="./simulation/solver/spatialDistribution.c" />
+      <File name="./simulation/solver/stateset.c" />
+      <File name="./simulation/solver/synchronous.c" />
+      <File name="./simulation/solver/initialization/initialization.c" />
+      <File name="./meta/meta_modelica_catch.c" />
+      <File name="./simulation/solver/nonlinearSolverHomotopy.c" />
+      <File name="./simulation/solver/nonlinearSolverHybrd.c" />
+      <File name="./simulation/solver/nonlinearValuesList.c" />
+      <File name="./simulation/solver/nonlinearSystem.c" />
+      <File name="./external_solvers/dgesv.c" />
+      <File name="./external_solvers/dgetrf.c" />
+      <File name="./external_solvers/dlamch.c" />
+      <File name="./external_solvers/ilaenv.c" />
+      <File name="./external_solvers/xerbla.c" />
+      <File name="./external_solvers/dgetf2.c" />
+      <File name="./external_solvers/dgetrs.c" />
+      <File name="./external_solvers/dlaswp.c" />
+      <File name="./external_solvers/ieeeck.c" />
+      <File name="./external_solvers/iparmq.c" />
+      <File name="./external_solvers/dgemm.c" />
+      <File name="./external_solvers/dger.c" />
+      <File name="./external_solvers/dscal.c" />
+      <File name="./external_solvers/dswap.c" />
+      <File name="./external_solvers/dtrsm.c" />
+      <File name="./external_solvers/idamax.c" />
+      <File name="./external_solvers/lsame.c" />
+      <File name="./external_solvers/i_nint.c" />
+      <File name="./external_solvers/pow_di.c" />
+      <File name="./external_solvers/s_cmp.c" />
+      <File name="./external_solvers/s_copy.c" />
+      <File name="./external_solvers/enorm_.c" />
+      <File name="./external_solvers/hybrj_.c" />
+      <File name="./external_solvers/dpmpar_.c" />
+      <File name="./external_solvers/qrfac_.c" />
+      <File name="./external_solvers/qform_.c" />
+      <File name="./external_solvers/dogleg_.c" />
+      <File name="./external_solvers/r1updt_.c" />
+      <File name="./external_solvers/r1mpyq_.c" />
+    </SourceFiles>
+  </CoSimulation>
+  <UnitDefinitions>
+    <Unit name="W/(m2.K)">
+      <BaseUnit s="-3" K="-1" kg="1" />
+    </Unit>
+    <Unit name="m/s2">
+      <BaseUnit m="1" s="-2" />
+    </Unit>
+    <Unit name="kg/s">
+      <BaseUnit s="-1" kg="1" />
+    </Unit>
+    <Unit name="bar">
+      <BaseUnit m="-1" s="-2" kg="1" factor="1e5" />
+    </Unit>
+    <Unit name="kg/kg">
+      <BaseUnit />
+    </Unit>
+    <Unit name="degC">
+      <BaseUnit K="1" />
+    </Unit>
+    <Unit name="J/(kg.K)">
+      <BaseUnit m="2" s="-2" K="-1" />
+    </Unit>
+    <Unit name="kg/mol">
+      <BaseUnit mol="-1" kg="1" />
+    </Unit>
+    <Unit name="kg">
+      <BaseUnit kg="1" />
+    </Unit>
+    <Unit name="m2">
+      <BaseUnit m="2" />
+    </Unit>
+    <Unit name="m3">
+      <BaseUnit m="3" />
+    </Unit>
+    <Unit name="J">
+      <BaseUnit m="2" s="-2" kg="1" />
+    </Unit>
+    <Unit name="W">
+      <BaseUnit m="2" s="-3" kg="1" />
+    </Unit>
+    <Unit name="J/kg">
+      <BaseUnit m="2" s="-2" />
+    </Unit>
+    <Unit name="m/s">
+      <BaseUnit m="1" s="-1" />
+    </Unit>
+    <Unit name="kg/m3">
+      <BaseUnit m="-3" kg="1" />
+    </Unit>
+    <Unit name="Pa.s">
+      <BaseUnit m="-1" s="-1" kg="1" />
+    </Unit>
+    <Unit name="Pa">
+      <BaseUnit m="-1" s="-2" kg="1" />
+    </Unit>
+    <Unit name="1">
+      <BaseUnit />
+    </Unit>
+    <Unit name="kg.m/s">
+      <BaseUnit m="1" s="-1" kg="1" />
+    </Unit>
+    <Unit name="N">
+      <BaseUnit m="1" s="-2" kg="1" />
+    </Unit>
+    <Unit name="s-1.K">
+      <BaseUnit s="-1" K="1" />
+    </Unit>
+    <Unit name="m.s-1">
+      <BaseUnit m="1" s="-1" />
+    </Unit>
+    <Unit name="K">
+      <BaseUnit K="1" />
+    </Unit>
+    <Unit name="m">
+      <BaseUnit m="1" />
+    </Unit>
+  </UnitDefinitions>
+  <TypeDefinitions>
+    <SimpleType name="Modelica.Fluid.Types.Dynamics">
+      <Enumeration>
+        <Item name="DynamicFreeInitial" value="1"/>
+        <Item name="FixedInitial" value="2"/>
+        <Item name="SteadyStateInitial" value="3"/>
+        <Item name="SteadyState" value="4"/>
+      </Enumeration>
+    </SimpleType>
+  </TypeDefinitions>
+  <LogCategories>
+    <Category name="logEvents" />
+    <Category name="logSingularLinearSystems" />
+    <Category name="logNonlinearSystems" />
+    <Category name="logDynamicStateSelection" />
+    <Category name="logStatusWarning" />
+    <Category name="logStatusDiscard" />
+    <Category name="logStatusError" />
+    <Category name="logStatusFatal" />
+    <Category name="logStatusPending" />
+    <Category name="logAll" />
+    <Category name="logFmi2Call" />
+  </LogCategories>
+  <DefaultExperiment startTime="0.0" stopTime="50.0" tolerance="1e-6" stepSize="0.1"/>
+  <ModelVariables>
+  <!-- Index of variable = "1" -->
+  <ScalarVariable
+    name="tank1.level"
+    valueReference="0"
+    description="Level height of tank"
+    >
+    <Real min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "2" -->
+  <ScalarVariable
+    name="tank1.medium.T"
+    valueReference="1"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "3" -->
+  <ScalarVariable
+    name="tank2.level"
+    valueReference="2"
+    description="Level height of tank"
+    >
+    <Real min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "4" -->
+  <ScalarVariable
+    name="tank2.medium.T"
+    valueReference="3"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "5" -->
+  <ScalarVariable
+    name="der(tank1.level)"
+    valueReference="4"
+    description="der(Level height of tank)"
+    >
+    <Real derivative="1" unit="m.s-1"/>
+  </ScalarVariable>
+  <!-- Index of variable = "6" -->
+  <ScalarVariable
+    name="der(tank1.medium.T)"
+    valueReference="5"
+    description="der(Temperature of medium)"
+    >
+    <Real derivative="2" unit="s-1.K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "7" -->
+  <ScalarVariable
+    name="der(tank2.level)"
+    valueReference="6"
+    description="der(Level height of tank)"
+    >
+    <Real derivative="3" unit="m.s-1"/>
+  </ScalarVariable>
+  <!-- Index of variable = "8" -->
+  <ScalarVariable
+    name="der(tank2.medium.T)"
+    valueReference="7"
+    description="der(Temperature of medium)"
+    >
+    <Real derivative="4" unit="s-1.K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "9" -->
+  <ScalarVariable
+    name="der(tank1.U)"
+    valueReference="8"
+    description="Internal energy of fluid"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "10" -->
+  <ScalarVariable
+    name="der(tank1.fluidVolume)"
+    valueReference="9"
+    description="Volume"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "11" -->
+  <ScalarVariable
+    name="der(tank1.m)"
+    valueReference="10"
+    description="Mass of fluid"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "12" -->
+  <ScalarVariable
+    name="der(tank1.medium.T_degC)"
+    valueReference="11"
+    description="Temperature of medium in [degC]"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "13" -->
+  <ScalarVariable
+    name="der(tank1.medium.u)"
+    valueReference="12"
+    description="Specific internal energy of medium"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "14" -->
+  <ScalarVariable
+    name="der(tank2.U)"
+    valueReference="13"
+    description="Internal energy of fluid"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "15" -->
+  <ScalarVariable
+    name="der(tank2.fluidVolume)"
+    valueReference="14"
+    description="Volume"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "16" -->
+  <ScalarVariable
+    name="der(tank2.m)"
+    valueReference="15"
+    description="Mass of fluid"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "17" -->
+  <ScalarVariable
+    name="der(tank2.medium.T_degC)"
+    valueReference="16"
+    description="Temperature of medium in [degC]"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "18" -->
+  <ScalarVariable
+    name="der(tank2.medium.u)"
+    valueReference="17"
+    description="Specific internal energy of medium"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "19" -->
+  <ScalarVariable
+    name="pipe.flowModel.Fs_p[1]"
+    valueReference="25"
+    description="Pressure forces"
+    >
+    <Real unit="N"/>
+  </ScalarVariable>
+  <!-- Index of variable = "20" -->
+  <ScalarVariable
+    name="pipe.flowModel.Ib_flows[1]"
+    valueReference="26"
+    description="Flow of momentum across boundaries"
+    initial="exact">
+    <Real start="0.0" unit="N"/>
+  </ScalarVariable>
+  <!-- Index of variable = "21" -->
+  <ScalarVariable
+    name="pipe.flowModel.Is[1]"
+    valueReference="27"
+    description="Momenta of flow segments"
+    >
+    <Real unit="kg.m/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "22" -->
+  <ScalarVariable
+    name="pipe.flowModel.Res_turbulent_internal[1]"
+    valueReference="28"
+    description="Re_turbulent used internally; to be defined by extending class"
+    initial="exact">
+    <Real start="0.0" unit="1"/>
+  </ScalarVariable>
+  <!-- Index of variable = "23" -->
+  <ScalarVariable
+    name="pipe.flowModel.dimensions[1]"
+    valueReference="30"
+    description="Characteristic dimensions for fluid flow (diameters for pipe flow)"
+    >
+    <Real unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "24" -->
+  <ScalarVariable
+    name="pipe.flowModel.dimensions[2]"
+    valueReference="31"
+    description="Characteristic dimensions for fluid flow (diameters for pipe flow)"
+    >
+    <Real unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "25" -->
+  <ScalarVariable
+    name="pipe.flowModel.dps_fg[1]"
+    valueReference="33"
+    description="Pressure drop between states"
+    >
+    <Real unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "26" -->
+  <ScalarVariable
+    name="pipe.flowModel.mus[1]"
+    valueReference="34"
+    >
+    <Real min="0.0" max="1e8" nominal="0.001" unit="Pa.s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "27" -->
+  <ScalarVariable
+    name="pipe.flowModel.mus[2]"
+    valueReference="35"
+    >
+    <Real min="0.0" max="1e8" nominal="0.001" unit="Pa.s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "28" -->
+  <ScalarVariable
+    name="pipe.flowModel.mus_act[1]"
+    valueReference="36"
+    description="Actual viscosity per segment"
+    >
+    <Real min="0.0" max="1e8" nominal="0.001" unit="Pa.s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "29" -->
+  <ScalarVariable
+    name="pipe.flowModel.rhos[1]"
+    valueReference="37"
+    >
+    <Real min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "30" -->
+  <ScalarVariable
+    name="pipe.flowModel.rhos[2]"
+    valueReference="38"
+    >
+    <Real min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "31" -->
+  <ScalarVariable
+    name="pipe.flowModel.rhos_act[1]"
+    valueReference="39"
+    description="Actual density per segment"
+    >
+    <Real min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "32" -->
+  <ScalarVariable
+    name="pipe.flowModel.states[1].T"
+    valueReference="40"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "33" -->
+  <ScalarVariable
+    name="pipe.flowModel.states[2].T"
+    valueReference="41"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "34" -->
+  <ScalarVariable
+    name="pipe.flowModel.states[1].p"
+    valueReference="42"
+    description="Absolute pressure of medium"
+    initial="approx">
+    <Real start="1e5" min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "35" -->
+  <ScalarVariable
+    name="pipe.flowModel.states[2].p"
+    valueReference="43"
+    description="Absolute pressure of medium"
+    initial="approx">
+    <Real start="1e5" min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "36" -->
+  <ScalarVariable
+    name="pipe.flowModel.vs[1]"
+    valueReference="44"
+    description="Mean velocities of fluid flow"
+    >
+    <Real unit="m/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "37" -->
+  <ScalarVariable
+    name="pipe.flowModel.vs[2]"
+    valueReference="45"
+    description="Mean velocities of fluid flow"
+    >
+    <Real unit="m/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "38" -->
+  <ScalarVariable
+    name="pipe.port_a.h_outflow"
+    valueReference="46"
+    description="Specific thermodynamic enthalpy close to the connection point if m_flow &lt; 0"
+    >
+    <Real min="-1e10" max="1e10" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "39" -->
+  <ScalarVariable
+    name="pipe.port_b.h_outflow"
+    valueReference="47"
+    description="Specific thermodynamic enthalpy close to the connection point if m_flow &lt; 0"
+    >
+    <Real min="-1e10" max="1e10" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "40" -->
+  <ScalarVariable
+    name="tank1.Hb_flow"
+    valueReference="48"
+    description="Enthalpy flow across boundaries or energy source/sink"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "41" -->
+  <ScalarVariable
+    name="tank1.U"
+    valueReference="49"
+    description="Internal energy of fluid"
+    >
+    <Real unit="J"/>
+  </ScalarVariable>
+  <!-- Index of variable = "42" -->
+  <ScalarVariable
+    name="tank1.Wb_flow"
+    valueReference="50"
+    description="Work flow across boundaries or source term"
+    initial="exact">
+    <Real start="0.0" unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "43" -->
+  <ScalarVariable
+    name="tank1.fluidVolume"
+    valueReference="51"
+    description="Volume"
+    >
+    <Real unit="m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "44" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.Ts[1]"
+    valueReference="52"
+    description="Temperatures defined by fluid states"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "45" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.heatPorts[1].Q_flow"
+    valueReference="53"
+    description="Heat flow rate (positive if flowing from outside into the component)"
+    initial="exact">
+    <Real start="0.0" unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "46" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.surfaceAreas[1]"
+    valueReference="54"
+    description="Heat transfer areas"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "47" -->
+  <ScalarVariable
+    name="tank1.m"
+    valueReference="55"
+    description="Mass of fluid"
+    >
+    <Real min="0.0" unit="kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "48" -->
+  <ScalarVariable
+    name="tank1.medium.MM"
+    valueReference="56"
+    description="Molar mass (of mixture or single fluid)"
+    initial="exact">
+    <Real start="0.0" min="0.001" max="0.25" nominal="0.032" unit="kg/mol"/>
+  </ScalarVariable>
+  <!-- Index of variable = "49" -->
+  <ScalarVariable
+    name="tank1.medium.R_s"
+    valueReference="57"
+    description="Gas constant (of mixture if applicable)"
+    initial="exact">
+    <Real start="1000.0" min="0.0" max="1e7" nominal="1000.0" unit="J/(kg.K)"/>
+  </ScalarVariable>
+  <!-- Index of variable = "50" -->
+  <ScalarVariable
+    name="tank1.medium.T_degC"
+    valueReference="58"
+    description="Temperature of medium in [degC]"
+    >
+    <Real unit="degC"/>
+  </ScalarVariable>
+  <!-- Index of variable = "51" -->
+  <ScalarVariable
+    name="tank1.medium.X[1]"
+    valueReference="59"
+    description="Mass fractions (= (component mass)/total mass  m_i/m)"
+    initial="exact">
+    <Real start="1.0" min="0.0" max="1.0" nominal="0.1" unit="kg/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "52" -->
+  <ScalarVariable
+    name="tank1.medium.d"
+    valueReference="60"
+    description="Density of medium"
+    initial="exact">
+    <Real start="1.0" min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "53" -->
+  <ScalarVariable
+    name="tank1.medium.p_bar"
+    valueReference="61"
+    description="Absolute pressure of medium in [bar]"
+    >
+    <Real unit="bar"/>
+  </ScalarVariable>
+  <!-- Index of variable = "54" -->
+  <ScalarVariable
+    name="tank1.medium.u"
+    valueReference="62"
+    description="Specific internal energy of medium"
+    >
+    <Real min="-1e8" max="1e8" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "55" -->
+  <ScalarVariable
+    name="tank1.portAreas[1]"
+    valueReference="63"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "56" -->
+  <ScalarVariable
+    name="tank1.portInDensities[1]"
+    valueReference="64"
+    description="Densities of the fluid at the device boundary"
+    initial="exact">
+    <Real start="1.0" min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "57" -->
+  <ScalarVariable
+    name="tank1.portVelocities[1]"
+    valueReference="65"
+    description="Velocities of fluid flow at device boundary"
+    >
+    <Real unit="m/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "58" -->
+  <ScalarVariable
+    name="tank1.ports[1].h_outflow"
+    valueReference="66"
+    description="Specific thermodynamic enthalpy close to the connection point if m_flow &lt; 0"
+    >
+    <Real min="-1e10" max="1e10" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "59" -->
+  <ScalarVariable
+    name="tank1.ports_E_flow[1]"
+    valueReference="67"
+    description="Flow of kinetic and potential energy at device boundary"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "60" -->
+  <ScalarVariable
+    name="tank1.ports_H_flow[1]"
+    valueReference="68"
+    >
+    <Real min="-1e8" max="1e8" nominal="1000.0" unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "61" -->
+  <ScalarVariable
+    name="tank1.ports_penetration[1]"
+    valueReference="69"
+    description="Penetration of port with fluid, depending on fluid level and port diameter"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "62" -->
+  <ScalarVariable
+    name="tank1.s[1]"
+    valueReference="70"
+    description="Curve parameters for port flows vs. port pressures; for further details see, Modelica Tutorial: Ideal switching devices"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "63" -->
+  <ScalarVariable
+    name="tank1.vessel_ps_static[1]"
+    valueReference="71"
+    description="Static pressures inside the vessel at the height of the corresponding ports, zero flow velocity"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "64" -->
+  <ScalarVariable
+    name="tank2.Hb_flow"
+    valueReference="72"
+    description="Enthalpy flow across boundaries or energy source/sink"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "65" -->
+  <ScalarVariable
+    name="tank2.U"
+    valueReference="73"
+    description="Internal energy of fluid"
+    >
+    <Real unit="J"/>
+  </ScalarVariable>
+  <!-- Index of variable = "66" -->
+  <ScalarVariable
+    name="tank2.Wb_flow"
+    valueReference="74"
+    description="Work flow across boundaries or source term"
+    initial="exact">
+    <Real start="0.0" unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "67" -->
+  <ScalarVariable
+    name="tank2.fluidVolume"
+    valueReference="75"
+    description="Volume"
+    >
+    <Real unit="m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "68" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.Ts[1]"
+    valueReference="76"
+    description="Temperatures defined by fluid states"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "69" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.heatPorts[1].Q_flow"
+    valueReference="77"
+    description="Heat flow rate (positive if flowing from outside into the component)"
+    initial="exact">
+    <Real start="0.0" unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "70" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.surfaceAreas[1]"
+    valueReference="78"
+    description="Heat transfer areas"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "71" -->
+  <ScalarVariable
+    name="tank2.m"
+    valueReference="79"
+    description="Mass of fluid"
+    >
+    <Real min="0.0" unit="kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "72" -->
+  <ScalarVariable
+    name="tank2.mb_flow"
+    valueReference="80"
+    description="Mass flows across boundaries"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "73" -->
+  <ScalarVariable
+    name="tank2.medium.MM"
+    valueReference="81"
+    description="Molar mass (of mixture or single fluid)"
+    initial="exact">
+    <Real start="0.0" min="0.001" max="0.25" nominal="0.032" unit="kg/mol"/>
+  </ScalarVariable>
+  <!-- Index of variable = "74" -->
+  <ScalarVariable
+    name="tank2.medium.R_s"
+    valueReference="82"
+    description="Gas constant (of mixture if applicable)"
+    initial="exact">
+    <Real start="1000.0" min="0.0" max="1e7" nominal="1000.0" unit="J/(kg.K)"/>
+  </ScalarVariable>
+  <!-- Index of variable = "75" -->
+  <ScalarVariable
+    name="tank2.medium.T_degC"
+    valueReference="83"
+    description="Temperature of medium in [degC]"
+    >
+    <Real unit="degC"/>
+  </ScalarVariable>
+  <!-- Index of variable = "76" -->
+  <ScalarVariable
+    name="tank2.medium.X[1]"
+    valueReference="84"
+    description="Mass fractions (= (component mass)/total mass  m_i/m)"
+    initial="exact">
+    <Real start="1.0" min="0.0" max="1.0" nominal="0.1" unit="kg/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "77" -->
+  <ScalarVariable
+    name="tank2.medium.d"
+    valueReference="85"
+    description="Density of medium"
+    initial="exact">
+    <Real start="1.0" min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "78" -->
+  <ScalarVariable
+    name="tank2.medium.p_bar"
+    valueReference="86"
+    description="Absolute pressure of medium in [bar]"
+    >
+    <Real unit="bar"/>
+  </ScalarVariable>
+  <!-- Index of variable = "79" -->
+  <ScalarVariable
+    name="tank2.medium.u"
+    valueReference="87"
+    description="Specific internal energy of medium"
+    >
+    <Real min="-1e8" max="1e8" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "80" -->
+  <ScalarVariable
+    name="tank2.portAreas[1]"
+    valueReference="88"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "81" -->
+  <ScalarVariable
+    name="tank2.portInDensities[1]"
+    valueReference="89"
+    description="Densities of the fluid at the device boundary"
+    initial="exact">
+    <Real start="1.0" min="0.0" max="1e5" nominal="1.0" unit="kg/m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "82" -->
+  <ScalarVariable
+    name="tank2.portVelocities[1]"
+    valueReference="90"
+    description="Velocities of fluid flow at device boundary"
+    >
+    <Real unit="m/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "83" -->
+  <ScalarVariable
+    name="tank2.ports[1].h_outflow"
+    valueReference="91"
+    description="Specific thermodynamic enthalpy close to the connection point if m_flow &lt; 0"
+    >
+    <Real min="-1e10" max="1e10" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "84" -->
+  <ScalarVariable
+    name="tank2.ports_E_flow[1]"
+    valueReference="92"
+    description="Flow of kinetic and potential energy at device boundary"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "85" -->
+  <ScalarVariable
+    name="tank2.ports_H_flow[1]"
+    valueReference="93"
+    >
+    <Real min="-1e8" max="1e8" nominal="1000.0" unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "86" -->
+  <ScalarVariable
+    name="tank2.ports_penetration[1]"
+    valueReference="94"
+    description="Penetration of port with fluid, depending on fluid level and port diameter"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "87" -->
+  <ScalarVariable
+    name="tank2.s[1]"
+    valueReference="95"
+    description="Curve parameters for port flows vs. port pressures; for further details see, Modelica Tutorial: Ideal switching devices"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "88" -->
+  <ScalarVariable
+    name="tank2.vessel_ps_static[1]"
+    valueReference="96"
+    description="Static pressures inside the vessel at the height of the corresponding ports, zero flow velocity"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "89" -->
+  <ScalarVariable
+    name="pipe.V"
+    valueReference="97"
+    description="Volume size"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "90" -->
+  <ScalarVariable
+    name="pipe.crossArea"
+    valueReference="98"
+    description="Inner cross section area"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "91" -->
+  <ScalarVariable
+    name="pipe.diameter"
+    valueReference="99"
+    description="Diameter of circular pipe"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.1" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "92" -->
+  <ScalarVariable
+    name="pipe.flowModel.Re_turbulent"
+    valueReference="100"
+    description="Start of turbulent regime, depending on type of flow device"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="1"/>
+  </ScalarVariable>
+  <!-- Index of variable = "93" -->
+  <ScalarVariable
+    name="pipe.flowModel.crossAreas[1]"
+    valueReference="101"
+    description="Cross flow areas at segment boundaries"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "94" -->
+  <ScalarVariable
+    name="pipe.flowModel.crossAreas[2]"
+    valueReference="102"
+    description="Cross flow areas at segment boundaries"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "95" -->
+  <ScalarVariable
+    name="pipe.flowModel.dheights[1]"
+    valueReference="103"
+    description="Height(states[2:n]) - Height(states[1:n-1])"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "96" -->
+  <ScalarVariable
+    name="pipe.flowModel.dp_nominal"
+    valueReference="104"
+    description="Nominal pressure loss (only for nominal models)"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "97" -->
+  <ScalarVariable
+    name="pipe.flowModel.g"
+    valueReference="106"
+    description="Constant gravity acceleration"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m/s2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "98" -->
+  <ScalarVariable
+    name="pipe.flowModel.m_flow_nominal"
+    valueReference="107"
+    description="Nominal mass flow rate"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "99" -->
+  <ScalarVariable
+    name="pipe.flowModel.m_flow_small"
+    valueReference="108"
+    description="Within regularization if |m_flows| &lt; m_flow_small (may be wider for large discontinuities in static head)"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "100" -->
+  <ScalarVariable
+    name="pipe.flowModel.m_flow_start"
+    valueReference="109"
+    description="Start value of mass flow rates"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "101" -->
+  <ScalarVariable
+    name="pipe.flowModel.nParallel"
+    valueReference="111"
+    description="Number of identical parallel flow devices"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real/>
+  </ScalarVariable>
+  <!-- Index of variable = "102" -->
+  <ScalarVariable
+    name="pipe.flowModel.p_a_start"
+    valueReference="112"
+    description="Start value for p[1] at design inflow"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "103" -->
+  <ScalarVariable
+    name="pipe.flowModel.p_b_start"
+    valueReference="113"
+    description="Start value for p[n+1] at design outflow"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "104" -->
+  <ScalarVariable
+    name="pipe.flowModel.pathLengths[1]"
+    valueReference="114"
+    description="Lengths along flow path"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "105" -->
+  <ScalarVariable
+    name="pipe.flowModel.pathLengths_internal[1]"
+    valueReference="115"
+    description="pathLengths used internally; to be defined by extending class"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "106" -->
+  <ScalarVariable
+    name="pipe.flowModel.roughnesses[1]"
+    valueReference="117"
+    description="Average height of surface asperities"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "107" -->
+  <ScalarVariable
+    name="pipe.flowModel.roughnesses[2]"
+    valueReference="118"
+    description="Average height of surface asperities"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "108" -->
+  <ScalarVariable
+    name="pipe.height_ab"
+    valueReference="119"
+    description="Height(port_b) - Height(port_a)"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="-1.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "109" -->
+  <ScalarVariable
+    name="pipe.length"
+    valueReference="120"
+    description="Length"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "110" -->
+  <ScalarVariable
+    name="pipe.m_flow_start"
+    valueReference="121"
+    description="Start value for mass flow rate"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "111" -->
+  <ScalarVariable
+    name="pipe.nParallel"
+    valueReference="122"
+    description="Number of identical parallel pipes"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" min="1.0"/>
+  </ScalarVariable>
+  <!-- Index of variable = "112" -->
+  <ScalarVariable
+    name="pipe.p_a_start"
+    valueReference="123"
+    description="Start value of pressure at port a"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "113" -->
+  <ScalarVariable
+    name="pipe.p_b_start"
+    valueReference="124"
+    description="Start value of pressure at port b"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "114" -->
+  <ScalarVariable
+    name="pipe.perimeter"
+    valueReference="125"
+    description="Inner perimeter"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "115" -->
+  <ScalarVariable
+    name="pipe.roughness"
+    valueReference="126"
+    description="Average height of surface asperities (default: smooth steel pipe)"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="2.5e-5" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "116" -->
+  <ScalarVariable
+    name="system.T_ambient"
+    valueReference="127"
+    description="Default ambient temperature"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="293.15" min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "117" -->
+  <ScalarVariable
+    name="system.T_start"
+    valueReference="128"
+    description="Default start value for temperatures"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "118" -->
+  <ScalarVariable
+    name="system.dp_small"
+    valueReference="129"
+    description="Default small pressure drop for regularization of laminar and zero flow"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" min="0.0" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "119" -->
+  <ScalarVariable
+    name="system.eps_m_flow"
+    valueReference="130"
+    description="Regularization of zero flow for |m_flow| &lt; eps_m_flow*m_flow_nominal"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1e-4" min="0.0"/>
+  </ScalarVariable>
+  <!-- Index of variable = "120" -->
+  <ScalarVariable
+    name="system.g"
+    valueReference="131"
+    description="Constant gravity acceleration"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="9.80665" unit="m/s2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "121" -->
+  <ScalarVariable
+    name="system.m_flow_nominal"
+    valueReference="132"
+    description="Default nominal mass flow rate"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "122" -->
+  <ScalarVariable
+    name="system.m_flow_small"
+    valueReference="133"
+    description="Default small mass flow rate for regularization of laminar and zero flow"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.01" min="0.0" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "123" -->
+  <ScalarVariable
+    name="system.m_flow_start"
+    valueReference="134"
+    description="Default start value for mass flow rates"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "124" -->
+  <ScalarVariable
+    name="system.p_ambient"
+    valueReference="135"
+    description="Default ambient pressure"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="101325.0" min="0.0" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "125" -->
+  <ScalarVariable
+    name="system.p_start"
+    valueReference="136"
+    description="Default start value for pressures"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "126" -->
+  <ScalarVariable
+    name="tank1.T_ambient"
+    valueReference="137"
+    description="Tank surface Temperature"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "127" -->
+  <ScalarVariable
+    name="tank1.T_start"
+    valueReference="138"
+    description="Start value of temperature"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "128" -->
+  <ScalarVariable
+    name="tank1.X_start[1]"
+    valueReference="139"
+    description="Start value of mass fractions m_i/m"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" min="0.0" max="1.0" nominal="0.1" unit="kg/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "129" -->
+  <ScalarVariable
+    name="tank1.crossArea"
+    valueReference="140"
+    description="Area of tank"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "130" -->
+  <ScalarVariable
+    name="tank1.h_start"
+    valueReference="142"
+    description="Start value of specific enthalpy"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="-1e10" max="1e10" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "131" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.T_ambient"
+    valueReference="143"
+    description="Ambient temperature"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "132" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.k"
+    valueReference="144"
+    description="Heat transfer coefficient to ambient"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="W/(m2.K)"/>
+  </ScalarVariable>
+  <!-- Index of variable = "133" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.states[1].p"
+    valueReference="145"
+    description="Absolute pressure of medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "134" -->
+  <ScalarVariable
+    name="tank1.height"
+    valueReference="146"
+    description="Height of tank"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.1" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "135" -->
+  <ScalarVariable
+    name="tank1.level_start"
+    valueReference="147"
+    description="Start value of tank level"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "136" -->
+  <ScalarVariable
+    name="tank1.m_flow_nominal"
+    valueReference="149"
+    description="Nominal value for mass flow rates in ports"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "137" -->
+  <ScalarVariable
+    name="tank1.m_flow_small"
+    valueReference="150"
+    description="Regularization range at zero mass flow rate"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "138" -->
+  <ScalarVariable
+    name="tank1.m_flow_turbulent[1]"
+    valueReference="151"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "139" -->
+  <ScalarVariable
+    name="tank1.medium.p"
+    valueReference="152"
+    description="Absolute pressure of medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "140" -->
+  <ScalarVariable
+    name="tank1.medium.state.p"
+    valueReference="153"
+    description="Absolute pressure of medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "141" -->
+  <ScalarVariable
+    name="tank1.p_ambient"
+    valueReference="154"
+    description="Tank surface pressure"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "142" -->
+  <ScalarVariable
+    name="tank1.p_start"
+    valueReference="155"
+    description="Start value of pressure"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "143" -->
+  <ScalarVariable
+    name="tank1.portsData[1].diameter"
+    valueReference="156"
+    description="Inner (hydraulic) diameter of inlet/outlet port"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.1" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "144" -->
+  <ScalarVariable
+    name="tank1.portsData[1].height"
+    valueReference="157"
+    description="Height over the bottom of the vessel"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.0" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "145" -->
+  <ScalarVariable
+    name="tank1.portsData[1].zeta_in"
+    valueReference="158"
+    description="Hydraulic resistance into vessel, default 1.04 for small diameter mounted flush with the wall"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.04" min="0.0"/>
+  </ScalarVariable>
+  <!-- Index of variable = "146" -->
+  <ScalarVariable
+    name="tank1.portsData[1].zeta_out"
+    valueReference="159"
+    description="Hydraulic resistance out of vessel, default 0.5 for small diameter mounted flush with the wall"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.5" min="0.0"/>
+  </ScalarVariable>
+  <!-- Index of variable = "147" -->
+  <ScalarVariable
+    name="tank2.T_ambient"
+    valueReference="169"
+    description="Tank surface Temperature"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "148" -->
+  <ScalarVariable
+    name="tank2.T_start"
+    valueReference="170"
+    description="Start value of temperature"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "149" -->
+  <ScalarVariable
+    name="tank2.X_start[1]"
+    valueReference="171"
+    description="Start value of mass fractions m_i/m"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" min="0.0" max="1.0" nominal="0.1" unit="kg/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "150" -->
+  <ScalarVariable
+    name="tank2.crossArea"
+    valueReference="172"
+    description="Area of tank"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.0" unit="m2"/>
+  </ScalarVariable>
+  <!-- Index of variable = "151" -->
+  <ScalarVariable
+    name="tank2.h_start"
+    valueReference="174"
+    description="Start value of specific enthalpy"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="-1e10" max="1e10" nominal="1e6" unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "152" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.T_ambient"
+    valueReference="175"
+    description="Ambient temperature"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "153" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.k"
+    valueReference="176"
+    description="Heat transfer coefficient to ambient"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="W/(m2.K)"/>
+  </ScalarVariable>
+  <!-- Index of variable = "154" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.states[1].p"
+    valueReference="177"
+    description="Absolute pressure of medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "155" -->
+  <ScalarVariable
+    name="tank2.height"
+    valueReference="178"
+    description="Height of tank"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.1" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "156" -->
+  <ScalarVariable
+    name="tank2.level_start"
+    valueReference="179"
+    description="Start value of tank level"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1e-10" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "157" -->
+  <ScalarVariable
+    name="tank2.m_flow_nominal"
+    valueReference="181"
+    description="Nominal value for mass flow rates in ports"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "158" -->
+  <ScalarVariable
+    name="tank2.m_flow_small"
+    valueReference="182"
+    description="Regularization range at zero mass flow rate"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "159" -->
+  <ScalarVariable
+    name="tank2.m_flow_turbulent[1]"
+    valueReference="183"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "160" -->
+  <ScalarVariable
+    name="tank2.medium.p"
+    valueReference="184"
+    description="Absolute pressure of medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "161" -->
+  <ScalarVariable
+    name="tank2.medium.state.p"
+    valueReference="185"
+    description="Absolute pressure of medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "162" -->
+  <ScalarVariable
+    name="tank2.p_ambient"
+    valueReference="186"
+    description="Tank surface pressure"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "163" -->
+  <ScalarVariable
+    name="tank2.p_start"
+    valueReference="187"
+    description="Start value of pressure"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "164" -->
+  <ScalarVariable
+    name="tank2.portsData[1].diameter"
+    valueReference="188"
+    description="Inner (hydraulic) diameter of inlet/outlet port"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.1" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "165" -->
+  <ScalarVariable
+    name="tank2.portsData[1].height"
+    valueReference="189"
+    description="Height over the bottom of the vessel"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.5" min="0.0" unit="m"/>
+  </ScalarVariable>
+  <!-- Index of variable = "166" -->
+  <ScalarVariable
+    name="tank2.portsData[1].zeta_in"
+    valueReference="190"
+    description="Hydraulic resistance into vessel, default 1.04 for small diameter mounted flush with the wall"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="1.04" min="0.0"/>
+  </ScalarVariable>
+  <!-- Index of variable = "167" -->
+  <ScalarVariable
+    name="tank2.portsData[1].zeta_out"
+    valueReference="191"
+    description="Hydraulic resistance out of vessel, default 0.5 for small diameter mounted flush with the wall"
+    variability="fixed"
+    causality="parameter"
+    >
+    <Real start="0.5" min="0.0"/>
+  </ScalarVariable>
+  <!-- Index of variable = "168" -->
+  <ScalarVariable
+    name="pipe.flowModel.Fs_fg[1]"
+    valueReference="201"
+    description="Friction and gravity forces"
+    >
+    <Real unit="N"/>
+  </ScalarVariable>
+  <!-- Index of variable = "169" -->
+  <ScalarVariable
+    name="pipe.flowModel.m_flows[1]"
+    valueReference="80"
+    description="Mass flow rates between states"
+    >
+    <Real min="-1e60" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "170" -->
+  <ScalarVariable
+    name="pipe.port_a.m_flow"
+    valueReference="80"
+    description="Mass flow rate from the connection point into the component"
+    >
+    <Real min="-1e60" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "171" -->
+  <ScalarVariable
+    name="pipe.port_a.p"
+    valueReference="42"
+    description="Thermodynamic pressure in the connection point"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "172" -->
+  <ScalarVariable
+    name="pipe.port_b.m_flow"
+    valueReference="205"
+    description="Mass flow rate from the connection point into the component"
+    >
+    <Real min="-1e5" max="1e60" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "173" -->
+  <ScalarVariable
+    name="pipe.port_b.p"
+    valueReference="43"
+    description="Thermodynamic pressure in the connection point"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "174" -->
+  <ScalarVariable
+    name="tank1.Qb_flow"
+    valueReference="53"
+    description="Heat flow across boundaries or energy source/sink"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "175" -->
+  <ScalarVariable
+    name="tank1.V"
+    valueReference="51"
+    description="Actual tank volume"
+    >
+    <Real unit="m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "176" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.Q_flows[1]"
+    valueReference="53"
+    description="Heat flow rates"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "177" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.heatPorts[1].T"
+    valueReference="52"
+    description="Port temperature"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "178" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.states[1].T"
+    valueReference="1"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "179" -->
+  <ScalarVariable
+    name="tank1.mb_flow"
+    valueReference="213"
+    description="Mass flows across boundaries"
+    >
+    <Real unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "180" -->
+  <ScalarVariable
+    name="tank1.medium.h"
+    valueReference="66"
+    description="Specific enthalpy of medium"
+    >
+    <Real unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "181" -->
+  <ScalarVariable
+    name="tank1.medium.state.T"
+    valueReference="1"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "182" -->
+  <ScalarVariable
+    name="tank1.ports[1].m_flow"
+    valueReference="216"
+    description="Mass flow rate from the connection point into the component"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "183" -->
+  <ScalarVariable
+    name="tank1.ports[1].p"
+    valueReference="42"
+    description="Thermodynamic pressure in the connection point"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "184" -->
+  <ScalarVariable
+    name="tank2.Qb_flow"
+    valueReference="77"
+    description="Heat flow across boundaries or energy source/sink"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "185" -->
+  <ScalarVariable
+    name="tank2.V"
+    valueReference="75"
+    description="Actual tank volume"
+    >
+    <Real unit="m3"/>
+  </ScalarVariable>
+  <!-- Index of variable = "186" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.Q_flows[1]"
+    valueReference="77"
+    description="Heat flow rates"
+    >
+    <Real unit="W"/>
+  </ScalarVariable>
+  <!-- Index of variable = "187" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.heatPorts[1].T"
+    valueReference="76"
+    description="Port temperature"
+    >
+    <Real min="0.0" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "188" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.states[1].T"
+    valueReference="3"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "189" -->
+  <ScalarVariable
+    name="tank2.medium.h"
+    valueReference="91"
+    description="Specific enthalpy of medium"
+    >
+    <Real unit="J/kg"/>
+  </ScalarVariable>
+  <!-- Index of variable = "190" -->
+  <ScalarVariable
+    name="tank2.medium.state.T"
+    valueReference="3"
+    description="Temperature of medium"
+    >
+    <Real min="1.0" max="1e4" nominal="300.0" unit="K"/>
+  </ScalarVariable>
+  <!-- Index of variable = "191" -->
+  <ScalarVariable
+    name="tank2.ports[1].m_flow"
+    valueReference="80"
+    description="Mass flow rate from the connection point into the component"
+    >
+    <Real min="-1e5" max="1e5" unit="kg/s"/>
+  </ScalarVariable>
+  <!-- Index of variable = "192" -->
+  <ScalarVariable
+    name="tank2.ports[1].p"
+    valueReference="43"
+    description="Thermodynamic pressure in the connection point"
+    >
+    <Real min="0.0" max="1e8" nominal="1e5" unit="Pa"/>
+  </ScalarVariable>
+  <!-- Index of variable = "193" -->
+  <ScalarVariable
+    name="pipe.flowModel.m"
+    valueReference="0"
+    description="Number of flow segments"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Integer/>
+  </ScalarVariable>
+  <!-- Index of variable = "194" -->
+  <ScalarVariable
+    name="pipe.flowModel.momentumDynamics"
+    valueReference="1"
+    description="Formulation of momentum balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "195" -->
+  <ScalarVariable
+    name="pipe.flowModel.n"
+    valueReference="2"
+    description="Number of discrete flow volumes"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Integer/>
+  </ScalarVariable>
+  <!-- Index of variable = "196" -->
+  <ScalarVariable
+    name="system.energyDynamics"
+    valueReference="3"
+    description="Default formulation of energy balances"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "197" -->
+  <ScalarVariable
+    name="system.massDynamics"
+    valueReference="4"
+    description="Default formulation of mass balances"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "198" -->
+  <ScalarVariable
+    name="system.momentumDynamics"
+    valueReference="5"
+    description="Default formulation of momentum balances, if options available"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "199" -->
+  <ScalarVariable
+    name="system.substanceDynamics"
+    valueReference="6"
+    description="Default formulation of substance balances"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "200" -->
+  <ScalarVariable
+    name="system.traceDynamics"
+    valueReference="7"
+    description="Default formulation of trace substance balances"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "201" -->
+  <ScalarVariable
+    name="tank1.energyDynamics"
+    valueReference="8"
+    description="Formulation of energy balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "202" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.n"
+    valueReference="9"
+    description="Number of heat transfer segments"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Integer/>
+  </ScalarVariable>
+  <!-- Index of variable = "203" -->
+  <ScalarVariable
+    name="tank1.massDynamics"
+    valueReference="10"
+    description="Formulation of mass balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "204" -->
+  <ScalarVariable
+    name="tank1.nPorts"
+    valueReference="11"
+    description="Number of ports"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Integer/>
+  </ScalarVariable>
+  <!-- Index of variable = "205" -->
+  <ScalarVariable
+    name="tank1.substanceDynamics"
+    valueReference="12"
+    description="Formulation of substance balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "206" -->
+  <ScalarVariable
+    name="tank1.traceDynamics"
+    valueReference="13"
+    description="Formulation of trace substance balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "207" -->
+  <ScalarVariable
+    name="tank2.energyDynamics"
+    valueReference="14"
+    description="Formulation of energy balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "208" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.n"
+    valueReference="15"
+    description="Number of heat transfer segments"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Integer/>
+  </ScalarVariable>
+  <!-- Index of variable = "209" -->
+  <ScalarVariable
+    name="tank2.massDynamics"
+    valueReference="16"
+    description="Formulation of mass balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "210" -->
+  <ScalarVariable
+    name="tank2.nPorts"
+    valueReference="17"
+    description="Number of ports"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Integer/>
+  </ScalarVariable>
+  <!-- Index of variable = "211" -->
+  <ScalarVariable
+    name="tank2.substanceDynamics"
+    valueReference="18"
+    description="Formulation of substance balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "212" -->
+  <ScalarVariable
+    name="tank2.traceDynamics"
+    valueReference="19"
+    description="Formulation of trace substance balance"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Enumeration declaredType="Modelica.Fluid.Types.Dynamics"/>
+  </ScalarVariable>
+  <!-- Index of variable = "213" -->
+  <ScalarVariable
+    name="pipe.allowFlowReversal"
+    valueReference="4"
+    description="= true to allow flow reversal, false restricts to design direction (port_a -&gt; port_b)"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "214" -->
+  <ScalarVariable
+    name="pipe.flowModel.allowFlowReversal"
+    valueReference="5"
+    description="= true, if flow reversal is enabled, otherwise restrict flow to design direction (states[1] -&gt; states[n+1])"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "215" -->
+  <ScalarVariable
+    name="pipe.flowModel.from_dp"
+    valueReference="8"
+    description="= true, use m_flow = f(dp), otherwise dp = f(m_flow)"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "216" -->
+  <ScalarVariable
+    name="pipe.flowModel.show_Res"
+    valueReference="9"
+    description="= true, if Reynolds numbers are included for plotting"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "217" -->
+  <ScalarVariable
+    name="pipe.flowModel.useUpstreamScheme"
+    valueReference="10"
+    description="= false to average upstream and downstream properties across flow segments"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "218" -->
+  <ScalarVariable
+    name="pipe.flowModel.use_Ib_flows"
+    valueReference="11"
+    description="= true to consider differences in flow of momentum through boundaries"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "219" -->
+  <ScalarVariable
+    name="pipe.isCircular"
+    valueReference="14"
+    description="= true, if cross sectional area is circular"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "220" -->
+  <ScalarVariable
+    name="system.allowFlowReversal"
+    valueReference="18"
+    description="= false to restrict to design flow direction (port_a -&gt; port_b)"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "221" -->
+  <ScalarVariable
+    name="system.use_eps_Re"
+    valueReference="19"
+    description="= true to determine turbulent region automatically using Reynolds number"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "222" -->
+  <ScalarVariable
+    name="tank1.heatTransfer.use_k"
+    valueReference="20"
+    description="= true to use k value for thermal isolation"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "223" -->
+  <ScalarVariable
+    name="tank1.medium.preferredMediumStates"
+    valueReference="22"
+    description="= true if StateSelect.prefer shall be used for the independent property variables of the medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "224" -->
+  <ScalarVariable
+    name="tank1.medium.standardOrderComponents"
+    valueReference="23"
+    description="If true, and reducedX = true, the last element of X will be computed from the other ones"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "225" -->
+  <ScalarVariable
+    name="tank1.use_HeatTransfer"
+    valueReference="24"
+    description="= true to use the HeatTransfer model"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "226" -->
+  <ScalarVariable
+    name="tank1.use_Re"
+    valueReference="25"
+    description="= true, if turbulent region is defined by Re, otherwise by m_flow_small"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "227" -->
+  <ScalarVariable
+    name="tank1.use_T_start"
+    valueReference="26"
+    description="= true, use T_start, otherwise h_start"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "228" -->
+  <ScalarVariable
+    name="tank1.use_portsData"
+    valueReference="27"
+    description="= false to neglect pressure loss and kinetic energy"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "229" -->
+  <ScalarVariable
+    name="tank2.heatTransfer.use_k"
+    valueReference="28"
+    description="= true to use k value for thermal isolation"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "230" -->
+  <ScalarVariable
+    name="tank2.medium.preferredMediumStates"
+    valueReference="30"
+    description="= true if StateSelect.prefer shall be used for the independent property variables of the medium"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "231" -->
+  <ScalarVariable
+    name="tank2.medium.standardOrderComponents"
+    valueReference="31"
+    description="If true, and reducedX = true, the last element of X will be computed from the other ones"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "232" -->
+  <ScalarVariable
+    name="tank2.use_HeatTransfer"
+    valueReference="32"
+    description="= true to use the HeatTransfer model"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "233" -->
+  <ScalarVariable
+    name="tank2.use_Re"
+    valueReference="33"
+    description="= true, if turbulent region is defined by Re, otherwise by m_flow_small"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "234" -->
+  <ScalarVariable
+    name="tank2.use_T_start"
+    valueReference="34"
+    description="= true, use T_start, otherwise h_start"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  <!-- Index of variable = "235" -->
+  <ScalarVariable
+    name="tank2.use_portsData"
+    valueReference="35"
+    description="= false to neglect pressure loss and kinetic energy"
+    variability="fixed"
+    causality="calculatedParameter"
+    >
+    <Boolean/>
+  </ScalarVariable>
+  </ModelVariables>
+  <ModelStructure>
+    <Derivatives>
+      <Unknown index="5" dependencies="1 2 3 4" dependenciesKind="dependent dependent dependent dependent" />
+      <Unknown index="6" dependencies="1 2 3 4" dependenciesKind="dependent dependent dependent dependent" />
+      <Unknown index="7" dependencies="1 2 3 4" dependenciesKind="dependent dependent dependent dependent" />
+      <Unknown index="8" dependencies="1 2 3 4" dependenciesKind="dependent dependent dependent dependent" />
+    </Derivatives>
+    <InitialUnknowns>
+      <Unknown index="1" dependencies="" dependenciesKind="" />
+      <Unknown index="2" dependencies="" dependenciesKind="" />
+      <Unknown index="3" dependencies="" dependenciesKind="" />
+      <Unknown index="4" dependencies="" dependenciesKind="" />
+      <Unknown index="5" dependencies="108 109 115 118 120 129 143 144 145 146 164 165 166 167" dependenciesKind="dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent" />
+      <Unknown index="6" dependencies="108 109 115 118 120 129 143 144 145 146 164 165 166 167" dependenciesKind="dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent" />
+      <Unknown index="7" dependencies="108 109 115 118 120 143 144 145 146 150 164 165 166 167" dependenciesKind="dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent" />
+      <Unknown index="8" dependencies="108 109 115 118 120 143 144 145 146 150 164 165 166 167" dependenciesKind="dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent dependent" />
+      <Unknown index="89" dependencies="109 111" dependenciesKind="dependent dependent" />
+      <Unknown index="90" dependencies="91" dependenciesKind="dependent" />
+      <Unknown index="92" dependencies="" dependenciesKind="" />
+      <Unknown index="93" dependencies="" dependenciesKind="" />
+      <Unknown index="94" dependencies="" dependenciesKind="" />
+      <Unknown index="95" dependencies="108" dependenciesKind="dependent" />
+      <Unknown index="96" dependencies="118" dependenciesKind="dependent" />
+      <Unknown index="97" dependencies="120" dependenciesKind="dependent" />
+      <Unknown index="98" dependencies="" dependenciesKind="" />
+      <Unknown index="99" dependencies="122" dependenciesKind="dependent" />
+      <Unknown index="100" dependencies="" dependenciesKind="" />
+      <Unknown index="101" dependencies="111" dependenciesKind="dependent" />
+      <Unknown index="102" dependencies="" dependenciesKind="" />
+      <Unknown index="103" dependencies="" dependenciesKind="" />
+      <Unknown index="104" dependencies="109" dependenciesKind="dependent" />
+      <Unknown index="105" dependencies="109" dependenciesKind="dependent" />
+      <Unknown index="106" dependencies="115" dependenciesKind="dependent" />
+      <Unknown index="107" dependencies="115" dependenciesKind="dependent" />
+      <Unknown index="110" dependencies="" dependenciesKind="" />
+      <Unknown index="112" dependencies="" dependenciesKind="" />
+      <Unknown index="113" dependencies="" dependenciesKind="" />
+      <Unknown index="114" dependencies="91" dependenciesKind="dependent" />
+      <Unknown index="117" dependencies="116" dependenciesKind="dependent" />
+      <Unknown index="121" dependencies="122" dependenciesKind="dependent" />
+      <Unknown index="123" dependencies="" dependenciesKind="" />
+      <Unknown index="125" dependencies="124" dependenciesKind="dependent" />
+      <Unknown index="126" dependencies="116" dependenciesKind="dependent" />
+      <Unknown index="127" dependencies="" dependenciesKind="" />
+      <Unknown index="130" dependencies="128" dependenciesKind="dependent" />
+      <Unknown index="131" dependencies="116" dependenciesKind="dependent" />
+      <Unknown index="132" dependencies="" dependenciesKind="" />
+      <Unknown index="133" dependencies="" dependenciesKind="" />
+      <Unknown index="136" dependencies="122" dependenciesKind="dependent" />
+      <Unknown index="137" dependencies="122" dependenciesKind="dependent" />
+      <Unknown index="138" dependencies="" dependenciesKind="" />
+      <Unknown index="139" dependencies="" dependenciesKind="" />
+      <Unknown index="140" dependencies="" dependenciesKind="" />
+      <Unknown index="141" dependencies="124" dependenciesKind="dependent" />
+      <Unknown index="142" dependencies="" dependenciesKind="" />
+      <Unknown index="147" dependencies="116" dependenciesKind="dependent" />
+      <Unknown index="148" dependencies="" dependenciesKind="" />
+      <Unknown index="151" dependencies="149" dependenciesKind="dependent" />
+      <Unknown index="152" dependencies="116" dependenciesKind="dependent" />
+      <Unknown index="153" dependencies="" dependenciesKind="" />
+      <Unknown index="154" dependencies="" dependenciesKind="" />
+      <Unknown index="157" dependencies="122" dependenciesKind="dependent" />
+      <Unknown index="158" dependencies="122" dependenciesKind="dependent" />
+      <Unknown index="159" dependencies="" dependenciesKind="" />
+      <Unknown index="160" dependencies="" dependenciesKind="" />
+      <Unknown index="161" dependencies="" dependenciesKind="" />
+      <Unknown index="162" dependencies="124" dependenciesKind="dependent" />
+      <Unknown index="163" dependencies="" dependenciesKind="" />
+      <Unknown index="193" dependencies="" dependenciesKind="" />
+      <Unknown index="194" dependencies="" dependenciesKind="" />
+      <Unknown index="195" dependencies="" dependenciesKind="" />
+      <Unknown index="196" dependencies="" dependenciesKind="" />
+      <Unknown index="197" dependencies="" dependenciesKind="" />
+      <Unknown index="198" dependencies="" dependenciesKind="" />
+      <Unknown index="199" dependencies="" dependenciesKind="" />
+      <Unknown index="200" dependencies="" dependenciesKind="" />
+      <Unknown index="201" dependencies="" dependenciesKind="" />
+      <Unknown index="202" dependencies="" dependenciesKind="" />
+      <Unknown index="203" dependencies="" dependenciesKind="" />
+      <Unknown index="204" dependencies="" dependenciesKind="" />
+      <Unknown index="205" dependencies="" dependenciesKind="" />
+      <Unknown index="206" dependencies="" dependenciesKind="" />
+      <Unknown index="207" dependencies="" dependenciesKind="" />
+      <Unknown index="208" dependencies="" dependenciesKind="" />
+      <Unknown index="209" dependencies="" dependenciesKind="" />
+      <Unknown index="210" dependencies="" dependenciesKind="" />
+      <Unknown index="211" dependencies="" dependenciesKind="" />
+      <Unknown index="212" dependencies="" dependenciesKind="" />
+      <Unknown index="213" dependencies="" dependenciesKind="" />
+      <Unknown index="214" dependencies="" dependenciesKind="" />
+      <Unknown index="215" dependencies="" dependenciesKind="" />
+      <Unknown index="216" dependencies="" dependenciesKind="" />
+      <Unknown index="217" dependencies="" dependenciesKind="" />
+      <Unknown index="218" dependencies="" dependenciesKind="" />
+      <Unknown index="219" dependencies="" dependenciesKind="" />
+      <Unknown index="220" dependencies="" dependenciesKind="" />
+      <Unknown index="221" dependencies="" dependenciesKind="" />
+      <Unknown index="222" dependencies="" dependenciesKind="" />
+      <Unknown index="223" dependencies="" dependenciesKind="" />
+      <Unknown index="224" dependencies="" dependenciesKind="" />
+      <Unknown index="225" dependencies="" dependenciesKind="" />
+      <Unknown index="226" dependencies="" dependenciesKind="" />
+      <Unknown index="227" dependencies="" dependenciesKind="" />
+      <Unknown index="228" dependencies="" dependenciesKind="" />
+      <Unknown index="229" dependencies="" dependenciesKind="" />
+      <Unknown index="230" dependencies="" dependenciesKind="" />
+      <Unknown index="231" dependencies="" dependenciesKind="" />
+      <Unknown index="232" dependencies="" dependenciesKind="" />
+      <Unknown index="233" dependencies="" dependenciesKind="" />
+      <Unknown index="234" dependencies="" dependenciesKind="" />
+      <Unknown index="235" dependencies="" dependenciesKind="" />
+    </InitialUnknowns>
+  </ModelStructure>
+</fmiModelDescription>

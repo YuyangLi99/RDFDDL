@@ -12,7 +12,7 @@ This repository implements the RDFdL verification pipeline that connects RDF/SHA
 - `Yogurt_example/`: Multi-stage yogurt process (heater, homogenizer, pasteurizer, cooler) with multi-mode transitions.
 - `Oven_cake/`: Industrial oven temperature control across four states and two modes.
 - `emptytank2/`: Two-tank continuous system with nonlinear ODEs.
-- `drumboiler/`: End-to-end FMU → RDF/SHACL → dL obligation pipeline for the Modelica DrumBoiler model.
+- `drumboiler/`: A Drumboiler steam generation system with two-dimensional linearized ODE
 
 ## 3. how to run each example
 
